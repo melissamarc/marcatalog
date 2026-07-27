@@ -1,0 +1,525 @@
+.assinar-pagina {
+  min-height: 100vh;
+  padding: 0 6% 70px;
+  color: #f8efe4;
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(159, 16, 44, 0.18),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(201, 24, 53, 0.1),
+      transparent 30%
+    ),
+    #0d0b0c;
+}
+
+.assinar-header {
+  width: 100%;
+  max-width: 1180px;
+  min-height: 88px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid rgba(248, 239, 228, 0.08);
+}
+
+.assinar-logo,
+.assinar-voltar {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.assinar-logo {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #fff8ee;
+  background: transparent;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.assinar-logo > span {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: #fff8ee;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #c91835, #7c0c23);
+  box-shadow: 0 8px 25px rgba(159, 16, 44, 0.28);
+}
+
+.assinar-voltar {
+  padding: 11px 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #d9cfc4;
+  border: 1px solid rgba(248, 239, 228, 0.12);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.025);
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.assinar-voltar:hover {
+  color: #fff8ee;
+  border-color: rgba(201, 24, 53, 0.5);
+  background: rgba(159, 16, 44, 0.1);
+}
+
+.assinar-conteudo {
+  width: 100%;
+  max-width: 1040px;
+  margin: 65px auto 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(330px, 0.92fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.assinar-formulario-area,
+.assinar-resumo,
+.assinar-sem-plano {
+  border: 1px solid rgba(248, 239, 228, 0.1);
+  border-radius: 22px;
+  background: rgba(24, 20, 21, 0.84);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(14px);
+}
+
+.assinar-formulario-area {
+  padding: 34px;
+}
+
+.assinar-titulo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.assinar-titulo > span {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  color: #f8efe4;
+  border: 1px solid rgba(201, 24, 53, 0.32);
+  border-radius: 14px;
+  background: rgba(159, 16, 44, 0.16);
+}
+
+.assinar-titulo p {
+  margin: 0 0 3px;
+  color: #c91835;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.assinar-titulo h1 {
+  margin: 0;
+  color: #fff8ee;
+  font-size: clamp(25px, 3vw, 32px);
+  line-height: 1.1;
+}
+
+.assinar-descricao {
+  max-width: 510px;
+  margin: 19px 0 30px;
+  color: #aa9f96;
+  line-height: 1.65;
+}
+
+.assinar-formulario-area form {
+  display: flex;
+  flex-direction: column;
+}
+
+.assinar-formulario-area label {
+  margin-bottom: 8px;
+  color: #eee3d7;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.assinar-formulario-area input {
+  width: 100%;
+  height: 53px;
+  margin-bottom: 21px;
+  padding: 0 16px;
+  color: #fff8ee;
+  border: 1px solid rgba(248, 239, 228, 0.12);
+  outline: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.035);
+  font-family: inherit;
+  font-size: 15px;
+  transition: 0.2s ease;
+}
+
+.assinar-formulario-area input::placeholder {
+  color: #706761;
+}
+
+.assinar-formulario-area input:focus {
+  border-color: #c91835;
+  box-shadow: 0 0 0 3px rgba(201, 24, 53, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.assinar-formulario-area input:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.assinar-email {
+  margin: 1px 0 24px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid rgba(248, 239, 228, 0.08);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.assinar-email span {
+  color: #847a73;
+  font-size: 12px;
+}
+
+.assinar-email strong {
+  overflow-wrap: anywhere;
+  color: #d9cfc4;
+  font-size: 14px;
+}
+
+.assinar-erro {
+  margin: 0 0 17px;
+  padding: 12px 14px;
+  color: #ffb9c4;
+  border: 1px solid rgba(239, 68, 68, 0.24);
+  border-radius: 10px;
+  background: rgba(159, 16, 44, 0.12);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.assinar-continuar {
+  min-height: 54px;
+  padding: 0 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #fff8ee;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #c91835, #9f102c);
+  box-shadow: 0 13px 30px rgba(159, 16, 44, 0.24);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  transition: 0.2s ease;
+}
+
+.assinar-continuar:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 35px rgba(159, 16, 44, 0.34);
+}
+
+.assinar-continuar:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
+.assinar-seguranca {
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #817770;
+}
+
+.assinar-seguranca svg {
+  flex-shrink: 0;
+  color: #ae8f72;
+}
+
+.assinar-seguranca p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.assinar-resumo {
+  padding: 30px;
+  position: sticky;
+  top: 25px;
+  border-color: rgba(201, 24, 53, 0.2);
+  background:
+    linear-gradient(
+      160deg,
+      rgba(159, 16, 44, 0.1),
+      transparent 42%
+    ),
+    rgba(24, 20, 21, 0.88);
+}
+
+.assinar-resumo-topo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.assinar-resumo-topo > span {
+  width: 41px;
+  height: 41px;
+  display: grid;
+  place-items: center;
+  color: #e85a70;
+  border-radius: 12px;
+  background: rgba(159, 16, 44, 0.16);
+}
+
+.assinar-resumo-topo p {
+  margin: 0;
+  color: #fff8ee;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.assinar-plano {
+  margin: 25px 0 22px;
+  padding-bottom: 21px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  border-bottom: 1px solid rgba(248, 239, 228, 0.09);
+}
+
+.assinar-plano span {
+  color: #8c8179;
+  font-size: 12px;
+}
+
+.assinar-plano h2 {
+  margin: 5px 0 0;
+  color: #fff8ee;
+  font-size: 21px;
+}
+
+.assinar-plano button {
+  padding: 0;
+  color: #e85a70;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.assinar-plano button:hover {
+  color: #ff8799;
+}
+
+.assinar-resumo ul {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+  list-style: none;
+}
+
+.assinar-resumo li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #bdb2aa;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.assinar-resumo li svg {
+  flex-shrink: 0;
+  color: #c91835;
+}
+
+.assinar-total {
+  margin-top: 27px;
+  padding-top: 23px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 15px;
+  border-top: 1px solid rgba(248, 239, 228, 0.09);
+}
+
+.assinar-total div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.assinar-total span {
+  color: #fff8ee;
+  font-weight: 800;
+}
+
+.assinar-total small {
+  color: #847a73;
+}
+
+.assinar-total strong {
+  color: #fff8ee;
+  font-size: 26px;
+  letter-spacing: -0.04em;
+}
+
+.assinar-renovacao {
+  margin: 17px 0 0;
+  color: #746b65;
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.assinar-carregando,
+.assinar-sem-plano {
+  width: min(480px, 92%);
+  margin: 150px auto 0;
+  padding: 45px 30px;
+  text-align: center;
+}
+
+.assinar-carregando div {
+  width: 35px;
+  height: 35px;
+  margin: 0 auto 18px;
+  border: 3px solid rgba(248, 239, 228, 0.12);
+  border-top-color: #c91835;
+  border-radius: 50%;
+  animation: assinar-girar 0.8s linear infinite;
+}
+
+.assinar-carregando p {
+  margin: 0;
+  color: #aa9f96;
+}
+
+.assinar-sem-plano > svg {
+  color: #c91835;
+}
+
+.assinar-sem-plano h1 {
+  margin: 17px 0 9px;
+  color: #fff8ee;
+}
+
+.assinar-sem-plano p {
+  margin: 0 0 25px;
+  color: #aa9f96;
+  line-height: 1.55;
+}
+
+.assinar-sem-plano button {
+  min-height: 48px;
+  padding: 0 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff8ee;
+  border: 0;
+  border-radius: 11px;
+  cursor: pointer;
+  background: #9f102c;
+  font-family: inherit;
+  font-weight: 800;
+}
+
+@keyframes assinar-girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 820px) {
+  .assinar-pagina {
+    padding: 0 4% 45px;
+  }
+
+  .assinar-conteudo {
+    margin-top: 38px;
+    grid-template-columns: 1fr;
+  }
+
+  .assinar-resumo {
+    position: static;
+  }
+}
+
+@media (max-width: 560px) {
+  .assinar-header {
+    min-height: 76px;
+  }
+
+  .assinar-logo {
+    font-size: 17px;
+  }
+
+  .assinar-logo > span {
+    width: 38px;
+    height: 38px;
+  }
+
+  .assinar-voltar {
+    padding: 9px;
+    font-size: 0;
+  }
+
+  .assinar-voltar svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .assinar-conteudo {
+    margin-top: 25px;
+  }
+
+  .assinar-formulario-area,
+  .assinar-resumo {
+    padding: 23px 19px;
+    border-radius: 18px;
+  }
+
+  .assinar-titulo {
+    align-items: flex-start;
+  }
+
+  .assinar-titulo > span {
+    width: 42px;
+    height: 42px;
+  }
+
+  .assinar-descricao {
+    margin-bottom: 24px;
+  }
+
+  .assinar-total strong {
+    font-size: 22px;
+  }
+}

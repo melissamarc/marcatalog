@@ -1,0 +1,143 @@
+:root {
+  font-family: "Inter", sans-serif;
+  color: #f7f0e7;
+  background-color: #140e10;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --cor-fundo: #140e10;
+  --cor-superficie: #21171a;
+  --cor-superficie-clara: #2c1e22;
+--cor-cereja: #9f102c;
+--cor-cereja-clara: #c91835;
+  --cor-bege: #eadcc8;
+  --cor-bege-claro: #f7f0e7;
+  --cor-texto: #f7f0e7;
+  --cor-texto-secundario: #b9a9a4;
+  --cor-borda: #453136;
+  --cor-erro: #ff6b7f;
+  --cor-sucesso: #54c98b;
+
+  --sombra:
+    0 20px 50px rgba(0, 0, 0, 0.28);
+
+  --raio-pequeno: 8px;
+  --raio-medio: 14px;
+  --raio-grande: 22px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(159, 16, 44, 0.18),
+      transparent 35%
+    ),
+    var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 1px solid transparent;
+  border-radius: var(--raio-pequeno);
+  padding: 12px 18px;
+  background-color: var(--cor-cereja);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--cor-cereja-clara);
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pequeno);
+  padding: 12px 14px;
+  background-color: var(--cor-superficie);
+  color: var(--cor-texto);
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--cor-cereja-clara);
+  box-shadow: 0 0 0 3px rgba(201, 24, 53, 0.18);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--cor-texto-secundario);
+}
+
+label {
+  color: var(--cor-bege);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+a {
+  color: var(--cor-cereja-clara);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background-color: var(--cor-cereja);
+  color: white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto;
+    transition: none !important;
+  }
+}

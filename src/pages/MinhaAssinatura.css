@@ -1,0 +1,473 @@
+.minha-assinatura-pagina {
+  min-height: 100vh;
+  padding: 0 6% 70px;
+  color: #f8efe4;
+  background:
+    radial-gradient(
+      circle at 12% 18%,
+      rgba(159, 16, 44, 0.18),
+      transparent 31%
+    ),
+    radial-gradient(
+      circle at 88% 80%,
+      rgba(201, 24, 53, 0.08),
+      transparent 28%
+    ),
+    #0d0b0c;
+}
+
+.minha-assinatura-header {
+  width: 100%;
+  max-width: 1180px;
+  min-height: 88px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid rgba(248, 239, 228, 0.08);
+}
+
+.minha-assinatura-logo,
+.minha-assinatura-voltar {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.minha-assinatura-logo {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #fff8ee;
+  background: transparent;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.minha-assinatura-logo span {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #c91835, #7c0c23);
+  box-shadow: 0 8px 25px rgba(159, 16, 44, 0.28);
+}
+
+.minha-assinatura-voltar {
+  padding: 11px 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #d9cfc4;
+  border: 1px solid rgba(248, 239, 228, 0.12);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.025);
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.minha-assinatura-voltar:hover {
+  color: #fff8ee;
+  border-color: rgba(201, 24, 53, 0.48);
+  background: rgba(159, 16, 44, 0.1);
+}
+
+.minha-assinatura-conteudo {
+  width: 100%;
+  max-width: 950px;
+  margin: 62px auto 0;
+}
+
+.minha-assinatura-titulo {
+  margin-bottom: 30px;
+}
+
+.minha-assinatura-titulo > p {
+  margin: 0 0 7px;
+  color: #c91835;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.minha-assinatura-titulo h1 {
+  margin: 0;
+  color: #fff8ee;
+  font-size: clamp(30px, 5vw, 42px);
+  letter-spacing: -0.04em;
+}
+
+.minha-assinatura-titulo > span {
+  margin-top: 10px;
+  display: block;
+  color: #9e948c;
+  line-height: 1.6;
+}
+
+.minha-assinatura-card,
+.minha-assinatura-acoes,
+.minha-assinatura-vazia {
+  border: 1px solid rgba(248, 239, 228, 0.1);
+  border-radius: 22px;
+  background: rgba(24, 20, 21, 0.86);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(14px);
+}
+
+.minha-assinatura-card {
+  padding: 32px;
+  border-color: rgba(201, 24, 53, 0.19);
+  background:
+    linear-gradient(
+      150deg,
+      rgba(159, 16, 44, 0.09),
+      transparent 42%
+    ),
+    rgba(24, 20, 21, 0.88);
+}
+
+.minha-assinatura-card-topo {
+  padding-bottom: 25px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid rgba(248, 239, 228, 0.09);
+}
+
+.minha-assinatura-card-topo p {
+  margin: 0 0 6px;
+  color: #8f857d;
+  font-size: 13px;
+}
+
+.minha-assinatura-card-topo h2 {
+  margin: 0;
+  color: #fff8ee;
+  font-size: 27px;
+}
+
+.minha-assinatura-status {
+  padding: 8px 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(248, 239, 228, 0.12);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.minha-assinatura-status.ativa {
+  color: #98e2b5;
+  border-color: rgba(52, 211, 153, 0.22);
+  background: rgba(52, 211, 153, 0.09);
+}
+
+.minha-assinatura-status.pendente {
+  color: #e6c28e;
+  border-color: rgba(230, 194, 142, 0.2);
+  background: rgba(230, 194, 142, 0.08);
+}
+
+.minha-assinatura-status.atrasada,
+.minha-assinatura-status.cancelada,
+.minha-assinatura-status.expirada {
+  color: #ff9cac;
+  border-color: rgba(239, 68, 68, 0.22);
+  background: rgba(159, 16, 44, 0.1);
+}
+
+.minha-assinatura-dados {
+  padding: 27px 0 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.minha-assinatura-dados article {
+  padding: 19px;
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  border: 1px solid rgba(248, 239, 228, 0.08);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.minha-assinatura-dados article > span {
+  width: 41px;
+  height: 41px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  color: #e05a70;
+  border-radius: 12px;
+  background: rgba(159, 16, 44, 0.14);
+}
+
+.minha-assinatura-dados article div {
+  display: flex;
+  flex-direction: column;
+}
+
+.minha-assinatura-dados p {
+  margin: 0 0 6px;
+  color: #847a73;
+  font-size: 12px;
+}
+
+.minha-assinatura-dados strong {
+  color: #fff8ee;
+  font-size: 18px;
+}
+
+.minha-assinatura-dados small {
+  margin-top: 4px;
+  color: #756c65;
+  font-size: 11px;
+}
+
+.minha-assinatura-aviso {
+  margin-top: 22px;
+  padding: 14px 16px;
+  color: #dec3a0;
+  border: 1px solid rgba(215, 178, 139, 0.18);
+  border-radius: 11px;
+  background: rgba(215, 178, 139, 0.07);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.minha-assinatura-acoes {
+  margin-top: 22px;
+  padding: 25px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.minha-assinatura-acoes h2 {
+  margin: 0 0 6px;
+  color: #fff8ee;
+  font-size: 18px;
+}
+
+.minha-assinatura-acoes p {
+  margin: 0;
+  color: #887e76;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.minha-assinatura-acoes > button {
+  min-height: 43px;
+  padding: 0 16px;
+  flex-shrink: 0;
+  color: #ff98a8;
+  border: 1px solid rgba(239, 68, 68, 0.24);
+  border-radius: 10px;
+  cursor: pointer;
+  background: rgba(159, 16, 44, 0.09);
+  font-family: inherit;
+  font-weight: 800;
+  transition: 0.2s ease;
+}
+
+.minha-assinatura-acoes > button:hover {
+  color: #ffd3da;
+  border-color: rgba(239, 68, 68, 0.42);
+  background: rgba(159, 16, 44, 0.17);
+}
+
+.minha-assinatura-acoes > .assinar-novamente {
+  color: #fff8ee;
+  border-color: transparent;
+  background: linear-gradient(135deg, #c91835, #9f102c);
+}
+
+.minha-assinatura-vazia {
+  padding: 50px 30px;
+  text-align: center;
+}
+
+.minha-assinatura-vazia > svg {
+  color: #c91835;
+}
+
+.minha-assinatura-vazia h2 {
+  margin: 16px 0 8px;
+  color: #fff8ee;
+}
+
+.minha-assinatura-vazia p {
+  margin: 0 auto 24px;
+  color: #928880;
+  line-height: 1.55;
+}
+
+.minha-assinatura-vazia button {
+  min-height: 47px;
+  padding: 0 20px;
+  color: #fff8ee;
+  border: 0;
+  border-radius: 11px;
+  cursor: pointer;
+  background: #9f102c;
+  font-family: inherit;
+  font-weight: 800;
+}
+
+.minha-assinatura-erro {
+  margin: 0 0 20px;
+  padding: 13px 15px;
+  color: #ffb9c4;
+  border: 1px solid rgba(239, 68, 68, 0.22);
+  border-radius: 11px;
+  background: rgba(159, 16, 44, 0.1);
+}
+
+.minha-assinatura-carregando {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #aaa098;
+}
+
+.minha-assinatura-carregando svg {
+  color: #c91835;
+  animation: assinatura-girar 0.9s linear infinite;
+}
+
+.cancelamento-fundo {
+  padding: 20px;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: rgba(5, 4, 4, 0.78);
+  backdrop-filter: blur(7px);
+}
+
+.cancelamento-modal {
+  width: min(460px, 100%);
+  padding: 34px;
+  border: 1px solid rgba(239, 68, 68, 0.23);
+  border-radius: 20px;
+  background: #191516;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+  text-align: center;
+}
+
+.cancelamento-modal > svg {
+  color: #c91835;
+}
+
+.cancelamento-modal h2 {
+  margin: 15px 0 9px;
+  color: #fff8ee;
+  font-size: 24px;
+}
+
+.cancelamento-modal p {
+  margin: 0;
+  color: #9d938b;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.cancelamento-modal > div {
+  margin-top: 27px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 11px;
+}
+
+.cancelamento-modal button {
+  min-height: 46px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 800;
+}
+
+.cancelamento-modal button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.cancelamento-voltar {
+  color: #ddd2c8;
+  border: 1px solid rgba(248, 239, 228, 0.12);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.cancelamento-confirmar {
+  color: #fff8ee;
+  border: 1px solid rgba(239, 68, 68, 0.22);
+  background: #9f102c;
+}
+
+@keyframes assinatura-girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 680px) {
+  .minha-assinatura-pagina {
+    padding: 0 4% 45px;
+  }
+
+  .minha-assinatura-header {
+    min-height: 76px;
+  }
+
+  .minha-assinatura-voltar {
+    padding: 9px;
+    font-size: 0;
+  }
+
+  .minha-assinatura-conteudo {
+    margin-top: 38px;
+  }
+
+  .minha-assinatura-card {
+    padding: 23px 19px;
+  }
+
+  .minha-assinatura-card-topo {
+    flex-direction: column;
+  }
+
+  .minha-assinatura-dados {
+    grid-template-columns: 1fr;
+  }
+
+  .minha-assinatura-acoes {
+    padding: 22px 19px;
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .minha-assinatura-acoes > button {
+    width: 100%;
+  }
+
+  .cancelamento-modal {
+    padding: 29px 20px;
+  }
+
+  .cancelamento-modal > div {
+    grid-template-columns: 1fr;
+  }
+}
