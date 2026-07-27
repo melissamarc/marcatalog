@@ -227,10 +227,7 @@ function Planos() {
 
           <h2>Contrate a montagem personalizada.</h2>
 
-          <span>
-            Nós configuramos sua empresa e cadastramos até 50
-            produtos a partir de R$ 500.
-          </span>
+        
         </div>
 
         <button type="button" onClick={solicitarMontagem}>
