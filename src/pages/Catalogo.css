@@ -856,3 +856,25 @@
 .catalogo-pagina .catalogo-vazio button:hover {
   background: var(--cor-cereja-clara);
 }
+
+.catalogo-logo {
+  width: 68px;
+  height: 68px;
+  flex: 0 0 68px;
+  padding: 4px;
+  border-radius: 15px;
+}
+
+.catalogo-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 520px) {
+  .catalogo-logo {
+    width: 58px;
+    height: 58px;
+    flex-basis: 58px;
+  }
+}
