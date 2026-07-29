@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  ArrowLeft,
+  Mail,
+  Send,
+  ShieldCheck,
+  Store,
+} from "lucide-react";
 import { supabase } from "../services/supabase";
+import "./Auth.css";
 
 function EsqueciSenha() {
   const [email, setEmail] = useState("");
@@ -23,58 +31,134 @@ function EsqueciSenha() {
     );
 
     if (error) {
-  if (error.message.includes("rate limit")) {
-    setErro(
-      "Muitos e-mails foram solicitados recentemente. Aguarde um pouco e tente novamente."
-    );
-  } else {
-    setErro("Não foi possível enviar o e-mail de recuperação.");
-  }
+      if (error.message.includes("rate limit")) {
+        setErro(
+          "Muitos e-mails foram solicitados recentemente. Aguarde um pouco e tente novamente."
+        );
+      } else {
+        setErro(
+          "Não foi possível enviar o e-mail de recuperação."
+        );
+      }
 
-  setCarregando(false);
-  return;
-}
+      setCarregando(false);
+      return;
+    }
+
     setMensagem(
-      "Se o e-mail estiver cadastrado, você receberá um link para redefinir sua senha."
+      "Se o e-mail estiver cadastrado, você receberá um link para criar uma nova senha."
     );
 
     setCarregando(false);
   }
 
   return (
-    <main>
-      <h1>Recuperar senha</h1>
+    <main className="auth-pagina">
+      <section className="auth-apresentacao">
+        <Link to="/" className="auth-logo">
+          <span>
+            <Store size={24} />
+          </span>
 
-      <p>
-        Informe o e-mail utilizado no cadastro do Marcatalog.
-      </p>
+          Marcatalog
+        </Link>
 
-      <form onSubmit={enviarRecuperacao}>
-        <div>
-          <label htmlFor="email">E-mail</label>
+        <div className="auth-apresentacao-conteudo">
+          <p className="auth-etiqueta">
+            Recuperação segura
+          </p>
 
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(evento) => setEmail(evento.target.value)}
-            placeholder="seuemail@exemplo.com"
-            required
-          />
+          <h1>
+            Recupere o acesso ao seu catálogo.
+          </h1>
+
+          <p>
+            Enviaremos um link seguro para o e-mail vinculado à sua
+            conta do Marcatalog.
+          </p>
+
+          <div className="auth-recurso-seguranca">
+            <ShieldCheck size={20} />
+
+            <span>
+              O link de recuperação é individual e possui prazo de
+              validade.
+            </span>
+          </div>
         </div>
 
-        {erro && <p>{erro}</p>}
+        <p className="auth-rodape">
+          © 2026 Marcatalog
+        </p>
+      </section>
 
-        {mensagem && <p>{mensagem}</p>}
+      <section className="auth-area-formulario">
+        <div className="auth-formulario-container">
+          <div className="auth-cabecalho">
+            <p>Esqueceu sua senha?</p>
+            <h2>Recuperar acesso</h2>
 
-        <button type="submit" disabled={carregando}>
-          {carregando
-            ? "Enviando..."
-            : "Enviar link de recuperação"}
-        </button>
-      </form>
+            <span>
+              Digite o e-mail utilizado na criação da sua conta.
+            </span>
+          </div>
 
-      <Link to="/login">Voltar para o login</Link>
+          <form
+            className="auth-formulario"
+            onSubmit={enviarRecuperacao}
+          >
+            <div className="auth-campo">
+              <label htmlFor="email">E-mail</label>
+
+              <div className="auth-input">
+                <Mail size={18} />
+
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(evento) =>
+                    setEmail(evento.target.value)
+                  }
+                  placeholder="seuemail@exemplo.com"
+                  autoComplete="email"
+                  required
+                  disabled={carregando}
+                />
+              </div>
+            </div>
+
+            {erro && (
+              <p className="auth-mensagem auth-erro">
+                {erro}
+              </p>
+            )}
+
+            {mensagem && (
+              <p className="auth-mensagem auth-sucesso">
+                {mensagem}
+              </p>
+            )}
+
+            <button
+              className="auth-botao-principal"
+              type="submit"
+              disabled={carregando}
+            >
+              {carregando
+                ? "Enviando..."
+                : "Enviar link de recuperação"}
+
+              {!carregando && <Send size={18} />}
+            </button>
+          </form>
+
+          <Link to="/login" className="auth-voltar">
+            <ArrowLeft size={16} />
+            Voltar para o login
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }
