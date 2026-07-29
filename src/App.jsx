@@ -8,10 +8,12 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { CarrinhoProvider } from "./contexts/CarrinhoContext";
 
 import RotaAssinante from "./components/RotaAssinante";
+import RotaProtegida from "./components/RotaProtegida";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
+import AdminPlataforma from "./pages/AdminPlataforma";
 
 import CriarEmpresa from "./pages/CriarEmpresa";
 import AdicionarProduto from "./pages/AdicionarProduto";
@@ -137,6 +139,15 @@ function App() {
               path="/minha-assinatura"
               element={<Navigate to="/admin" replace />}
             />
+
+            <Route
+  path="/plataforma"
+  element={
+    <RotaProtegida>
+      <AdminPlataforma />
+    </RotaProtegida>
+  }
+/>
 
             <Route
               path="*"

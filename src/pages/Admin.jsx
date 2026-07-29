@@ -10,6 +10,7 @@ import {
   LogOut,
   MessageCircle,
   Package,
+  ShieldCheck,
   PackagePlus,
   Settings,
   Store,
@@ -185,6 +186,17 @@ function Admin() {
               <MessageCircle size={19} />
               Suporte
             </button>
+
+            {usuario.email === "marcielomelissa@gmail.com" && (
+  <button
+    type="button"
+    onClick={() => navigate("/plataforma")}
+  >
+    <ShieldCheck size={19} />
+    Administrar plataforma
+  </button>
+)}
+
           </nav>
         </div>
 
@@ -407,6 +419,25 @@ function Admin() {
                 </small>
               </div>
             </button>
+
+            {usuario.email === "marcielomelissa@gmail.com" && (
+  <button
+    type="button"
+    onClick={() => navigate("/plataforma")}
+  >
+    <span>
+      <ShieldCheck size={23} />
+    </span>
+
+    <div>
+      <strong>Administrar plataforma</strong>
+      <small>
+        Crie contas e controle os acessos
+      </small>
+    </div>
+  </button>
+)}
+
           </div>
         </section>
       </section>
