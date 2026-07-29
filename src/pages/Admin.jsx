@@ -137,13 +137,12 @@ function Admin() {
     <main className="admin-pagina">
       <aside className="admin-sidebar">
         <div>
-          <div className="admin-marca">
-            <span>
-              <Store size={22} />
-            </span>
-
-            Marcatalog
-          </div>
+         <div className="admin-marca">
+  <img
+    src="/marcatalog-logo-final.png"
+    alt="Marcatalog"
+  />
+</div>
 
           <nav className="admin-menu">
             <button className="ativo" type="button">

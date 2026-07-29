@@ -560,3 +560,18 @@
     grid-template-columns: 1fr;
   }
 }
+
+.home-logo img {
+  width: 155px;
+  height: 64px;
+  display: block;
+  object-fit: contain;
+  object-position: left center;
+}
+
+@media (max-width: 600px) {
+  .home-logo img {
+    width: 125px;
+    height: 52px;
+  }
+}

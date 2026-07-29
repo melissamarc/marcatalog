@@ -288,3 +288,18 @@
     font-size: 1.9rem;
   }
 }
+
+.auth-logo img {
+  width: 175px;
+  height: 70px;
+  display: block;
+  object-fit: contain;
+  object-position: left center;
+}
+
+@media (max-width: 600px) {
+  .auth-logo img {
+    width: 145px;
+    height: 58px;
+  }
+}

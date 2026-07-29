@@ -217,17 +217,16 @@ function AdminPlataforma() {
     <main className="plataforma-pagina">
       <aside className="plataforma-sidebar">
         <div>
-          <button
-            className="plataforma-marca"
-            type="button"
-            onClick={() => navigate("/")}
-          >
-            <span>
-              <Store size={22} />
-            </span>
-
-            Marcatalog
-          </button>
+         <button
+  className="plataforma-marca"
+  type="button"
+  onClick={() => navigate("/")}
+>
+  <img
+    src="/marcatalog-logo-final.png"
+    alt="Marcatalog"
+  />
+</button>
 
           <div className="plataforma-administradora">
             <ShieldCheck size={18} />

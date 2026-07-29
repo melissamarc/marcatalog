@@ -499,3 +499,11 @@
     grid-template-columns: 1fr;
   }
 }
+
+.admin-marca img {
+  width: 165px;
+  height: 66px;
+  display: block;
+  object-fit: contain;
+  object-position: left center;
+}

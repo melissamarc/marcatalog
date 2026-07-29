@@ -69,13 +69,12 @@ function RedefinirSenha() {
   return (
     <main className="auth-pagina">
       <section className="auth-apresentacao">
-        <Link to="/" className="auth-logo">
-          <span>
-            <Store size={24} />
-          </span>
-
-          Marcatalog
-        </Link>
+       <Link to="/" className="auth-logo">
+  <img
+    src="/marcatalog-logo-final.png"
+    alt="Marcatalog"
+  />
+</Link>
 
         <div className="auth-apresentacao-conteudo">
           <p className="auth-etiqueta">

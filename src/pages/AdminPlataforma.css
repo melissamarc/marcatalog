@@ -677,3 +677,18 @@
     width: 100%;
   }
 }
+
+.plataforma-marca img {
+  width: 165px;
+  height: 66px;
+  display: block;
+  object-fit: contain;
+  object-position: left center;
+}
+
+@media (max-width: 520px) {
+  .plataforma-marca img {
+    width: 130px;
+    height: 52px;
+  }
+}

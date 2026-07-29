@@ -19,12 +19,11 @@ function Home() {
     <main className="home">
       <header className="home-header">
         <Link to="/" className="home-logo">
-          <span className="home-logo-icone">
-            <Store size={23} />
-          </span>
-
-          <span>Marcatalog</span>
-        </Link>
+  <img
+    src="/marcatalog-logo-final.png"
+    alt="Marcatalog"
+  />
+</Link>
 
         <nav className="home-navegacao">
           <a href="#recursos">Recursos</a>
