@@ -9,6 +9,9 @@ import {
   Save,
   Settings,
   UploadCloud,
+  Moon,
+Palette,
+Sun,
 } from "lucide-react";
 import { supabase } from "../services/supabase";
 import { useAuth } from "../contexts/AuthContext";
@@ -23,6 +26,10 @@ function ConfiguracoesEmpresa() {
   const [slug, setSlug] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [novoLogo, setNovoLogo] = useState(null);
+  const [temaCatalogo, setTemaCatalogo] =
+  useState("claro");
+const [corCatalogo, setCorCatalogo] =
+  useState("cereja");
   const [carregando, setCarregando] = useState(true);
   const [salvando, setSalvando] = useState(false);
   const [erro, setErro] = useState("");
@@ -45,6 +52,8 @@ function ConfiguracoesEmpresa() {
       setNome(data.nome);
       setSlug(data.slug);
       setWhatsapp(data.whatsapp);
+      setTemaCatalogo(data.tema_catalogo ?? "claro");
+setCorCatalogo(data.cor_catalogo ?? "cereja");
       setCarregando(false);
     }
 
@@ -117,12 +126,14 @@ function ConfiguracoesEmpresa() {
 
     const { error: erroAtualizacao } = await supabase
       .from("empresas")
-      .update({
-        nome,
-        slug,
-        whatsapp,
-        logo_url: logoUrl,
-      })
+     .update({
+  nome,
+  slug,
+  whatsapp,
+  logo_url: logoUrl,
+  tema_catalogo: temaCatalogo,
+  cor_catalogo: corCatalogo,
+})
       .eq("id", empresa.id);
 
     if (erroAtualizacao) {
@@ -287,6 +298,117 @@ function ConfiguracoesEmpresa() {
               </small>
             </div>
           </div>
+
+          <div className="config-card config-aparencia">
+  <div className="config-card-titulo">
+    <span>
+      <Palette size={21} />
+    </span>
+
+    <div>
+      <h2>Aparência do catálogo</h2>
+      <p>
+        Escolha o tema e a cor principal da sua vitrine.
+      </p>
+    </div>
+  </div>
+
+  <div className="config-opcao-grupo">
+    <label>Tema do catálogo</label>
+
+    <div className="config-temas">
+      <button
+        className={
+          temaCatalogo === "claro" ? "selecionado" : ""
+        }
+        type="button"
+        onClick={() => setTemaCatalogo("claro")}
+      >
+        <span className="config-tema-previa claro">
+          <Sun size={20} />
+        </span>
+
+        <div>
+          <strong>Claro</strong>
+          <small>Fundo bege e cards brancos</small>
+        </div>
+      </button>
+
+      <button
+        className={
+          temaCatalogo === "escuro" ? "selecionado" : ""
+        }
+        type="button"
+        onClick={() => setTemaCatalogo("escuro")}
+      >
+        <span className="config-tema-previa escuro">
+          <Moon size={20} />
+        </span>
+
+        <div>
+          <strong>Escuro</strong>
+          <small>Fundo escuro e alto contraste</small>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <div className="config-opcao-grupo">
+    <label>Cor principal</label>
+
+    <div className="config-cores">
+      {[
+        {
+          codigo: "cereja",
+          nome: "Cereja",
+          cor: "#9f102c",
+        },
+        {
+          codigo: "azul",
+          nome: "Azul",
+          cor: "#2563eb",
+        },
+        {
+          codigo: "verde",
+          nome: "Verde",
+          cor: "#15803d",
+        },
+        {
+          codigo: "roxo",
+          nome: "Roxo",
+          cor: "#7c3aed",
+        },
+        {
+          codigo: "laranja",
+          nome: "Laranja",
+          cor: "#d95f18",
+        },
+      ].map((opcao) => (
+        <button
+          className={
+            corCatalogo === opcao.codigo
+              ? "selecionado"
+              : ""
+          }
+          type="button"
+          key={opcao.codigo}
+          onClick={() =>
+            setCorCatalogo(opcao.codigo)
+          }
+        >
+          <span
+            style={{
+              backgroundColor: opcao.cor,
+            }}
+          />
+
+          {opcao.nome}
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
+
         </section>
 
         <aside className="config-lateral">

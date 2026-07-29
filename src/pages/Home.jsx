@@ -8,6 +8,8 @@ import {
 } from "lucide-react";
 import "./Home.css";
 
+
+
 function Home() {
   const mensagemWhatsApp = encodeURIComponent(
     "Olá! Conheci o Marcatalog e gostaria de solicitar acesso e saber mais sobre a criação do meu catálogo."
@@ -31,6 +33,7 @@ function Home() {
         </nav>
 
         <div className="home-acoes">
+          
           <Link to="/login" className="botao-entrar">
             Entrar
           </Link>

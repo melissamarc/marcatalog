@@ -7,6 +7,7 @@ import {
 import { AuthProvider } from "./contexts/AuthContext";
 import { CarrinhoProvider } from "./contexts/CarrinhoContext";
 
+
 import RotaAssinante from "./components/RotaAssinante";
 import RotaProtegida from "./components/RotaProtegida";
 
@@ -29,6 +30,7 @@ import RedefinirSenha from "./pages/RedefinirSenha";
 
 function App() {
   return (
+ 
     <AuthProvider>
       <CarrinhoProvider>
         <BrowserRouter>
@@ -157,6 +159,7 @@ function App() {
         </BrowserRouter>
       </CarrinhoProvider>
     </AuthProvider>
+   
   );
 }
 

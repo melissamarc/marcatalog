@@ -133,7 +133,13 @@ function Catalogo() {
   const possuiFiltros = busca || categoria || marca;
 
   return (
-    <main className="catalogo-pagina">
+    <main
+  className={`catalogo-pagina catalogo-tema-${
+    empresa.tema_catalogo ?? "claro"
+  } catalogo-cor-${
+    empresa.cor_catalogo ?? "cereja"
+  }`}
+>
       <header className="catalogo-header">
         <div className="catalogo-header-conteudo">
           <div className="catalogo-empresa">

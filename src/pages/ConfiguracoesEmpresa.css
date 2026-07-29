@@ -272,3 +272,145 @@
     padding: 20px 16px;
   }
 }
+
+.config-aparencia {
+  margin-top: 20px;
+}
+
+.config-opcao-grupo {
+  margin-top: 25px;
+}
+
+.config-opcao-grupo > label {
+  margin-bottom: 10px;
+  display: block;
+  color: #eee3d9;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.config-temas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 11px;
+}
+
+.config-temas > button {
+  min-height: 78px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #c8bdb5;
+  border: 1px solid rgba(248, 239, 228, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.025);
+  font-family: inherit;
+  text-align: left;
+  transition: 0.2s ease;
+}
+
+.config-temas > button:hover,
+.config-temas > button.selecionado {
+  border-color: rgba(201, 24, 53, 0.55);
+  background: rgba(159, 16, 44, 0.09);
+}
+
+.config-temas > button.selecionado {
+  box-shadow: 0 0 0 3px rgba(201, 24, 53, 0.08);
+}
+
+.config-tema-previa {
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+}
+
+.config-tema-previa.claro {
+  color: #9f102c;
+  border: 1px solid #dfd1c2;
+  background: #f8f3ed;
+}
+
+.config-tema-previa.escuro {
+  color: #f1b5be;
+  border: 1px solid rgba(248, 239, 228, 0.12);
+  background: #181013;
+}
+
+.config-temas > button div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.config-temas strong {
+  color: #fff8ee;
+  font-size: 0.78rem;
+}
+
+.config-temas small {
+  color: #817770;
+  font-size: 0.62rem;
+}
+
+.config-cores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.config-cores button {
+  min-height: 39px;
+  padding: 0 11px 0 7px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #ada29a;
+  border: 1px solid rgba(248, 239, 228, 0.1);
+  border-radius: 999px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.025);
+  font-family: inherit;
+  font-size: 0.68rem;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.config-cores button > span {
+  width: 25px;
+  height: 25px;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+}
+
+.config-cores button:hover,
+.config-cores button.selecionado {
+  color: #fff8ee;
+  border-color: rgba(248, 239, 228, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.config-cores button.selecionado {
+  box-shadow: 0 0 0 3px rgba(248, 239, 228, 0.06);
+}
+
+@media (max-width: 570px) {
+  .config-temas {
+    grid-template-columns: 1fr;
+  }
+
+  .config-cores {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .config-cores button {
+    width: 100%;
+  }
+}
