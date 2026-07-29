@@ -276,14 +276,19 @@ Deno.serve(async (req) => {
         method: "POST",
         headers: headersAsaas,
         body: JSON.stringify({
-          customer: asaasClienteId,
-          billingType: "UNDEFINED",
-          value: Number(plano.preco),
-          nextDueDate: hoje,
-          cycle: ciclo,
-          description: `Marcatalog - ${plano.nome}`,
-          externalReference: user.id,
-        }),
+  customer: asaasClienteId,
+  billingType: "UNDEFINED",
+  value: Number(plano.preco),
+  nextDueDate: hoje,
+  cycle: ciclo,
+  description: `Marcatalog - ${plano.nome}`,
+  externalReference: user.id,
+  callback: {
+    successUrl:
+      "https://marcatalog.vercel.app/pagamento-sucesso",
+    autoRedirect: true,
+  },
+}),
       }
     );
 
