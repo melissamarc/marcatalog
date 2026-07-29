@@ -692,3 +692,155 @@
     height: 52px;
   }
 }
+
+.plataforma-senha-temporaria {
+  margin-top: 17px;
+  padding: 20px;
+  border: 1px solid rgba(215, 178, 139, 0.23);
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(215, 178, 139, 0.08),
+      transparent
+    ),
+    rgba(24, 20, 21, 0.88);
+}
+
+.plataforma-senha-temporaria > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.plataforma-senha-temporaria
+  > div:first-child
+  > span {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  color: #e3bd92;
+  border-radius: 11px;
+  background: rgba(215, 178, 139, 0.12);
+}
+
+.plataforma-senha-temporaria
+  > div:first-child
+  > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.plataforma-senha-temporaria p {
+  margin: 0;
+  color: #e3bd92;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.plataforma-senha-temporaria strong {
+  color: #fff8ee;
+  font-size: 0.83rem;
+}
+
+.plataforma-senha-campo {
+  margin-top: 15px;
+  padding: 8px 8px 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  border: 1px solid rgba(248, 239, 228, 0.1);
+  border-radius: 11px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.plataforma-senha-campo code {
+  overflow-x: auto;
+  color: #fff8ee;
+  font-family: monospace;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.plataforma-senha-campo button {
+  min-height: 37px;
+  padding: 0 12px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: #21171a;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #e3bd92;
+  font-family: inherit;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.plataforma-senha-temporaria > small {
+  margin-top: 11px;
+  display: block;
+  color: #817770;
+  font-size: 0.63rem;
+  line-height: 1.5;
+}
+
+.plataforma-acoes-cliente {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.plataforma-senha {
+  min-height: 35px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #d8b68f;
+  border: 1px solid rgba(215, 178, 139, 0.2);
+  border-radius: 9px;
+  cursor: pointer;
+  background: rgba(215, 178, 139, 0.07);
+  font-family: inherit;
+  font-size: 0.68rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.plataforma-senha:hover {
+  color: #ffe1bd;
+  border-color: rgba(215, 178, 139, 0.4);
+  background: rgba(215, 178, 139, 0.12);
+}
+
+.plataforma-senha:disabled {
+  cursor: wait;
+  opacity: 0.5;
+}
+
+@media (max-width: 600px) {
+  .plataforma-senha-campo {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .plataforma-senha-campo button {
+    width: 100%;
+  }
+
+  .plataforma-acoes-cliente {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

@@ -278,6 +278,44 @@ Deno.serve(async (req) => {
       });
     }
 
+    if (acao === "gerar_senha_temporaria") {
+  const usuarioId = corpo?.usuarioId;
+
+  if (!usuarioId) {
+    return responder(
+      { erro: "Cliente não identificado." },
+      400
+    );
+  }
+
+  const senhaTemporaria = gerarSenhaTemporaria();
+
+  const { data: usuarioAtualizado, error: erroSenha } =
+    await supabaseAdmin.auth.admin.updateUserById(
+      usuarioId,
+      {
+        password: senhaTemporaria,
+      }
+    );
+
+  if (erroSenha || !usuarioAtualizado.user) {
+    return responder(
+      {
+        erro:
+          "Não foi possível gerar a senha temporária.",
+      },
+      500
+    );
+  }
+
+  return responder({
+    sucesso: true,
+    senhaTemporaria,
+    mensagem:
+      "Senha temporária gerada. Ela será exibida somente agora.",
+  });
+}
+
     if (acao === "liberar" || acao === "bloquear") {
       const usuarioId = corpo?.usuarioId;
 

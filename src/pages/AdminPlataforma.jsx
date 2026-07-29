@@ -14,6 +14,8 @@ import {
   ShieldCheck,
   Store,
   UserCheck,
+  Copy,
+KeyRound,
   Users,
 } from "lucide-react";
 import { supabase } from "../services/supabase";
@@ -30,6 +32,8 @@ function AdminPlataforma() {
   const [carregando, setCarregando] = useState(true);
   const [criando, setCriando] = useState(false);
   const [alterandoId, setAlterandoId] = useState("");
+  const [senhaTemporaria, setSenhaTemporaria] =
+  useState(null);
   const [erro, setErro] = useState("");
   const [mensagem, setMensagem] = useState("");
 
@@ -110,6 +114,53 @@ function AdminPlataforma() {
 
     await carregarClientes();
   }
+
+  async function gerarSenhaTemporaria(cliente) {
+  setErro("");
+  setMensagem("");
+  setSenhaTemporaria(null);
+  setAlterandoId(cliente.id);
+
+  const { data, error } = await supabase.functions.invoke(
+    "administrar-clientes",
+    {
+      body: {
+        acao: "gerar_senha_temporaria",
+        usuarioId: cliente.id,
+      },
+    }
+  );
+
+  if (error) {
+    const mensagemErro = await extrairMensagemErro(
+      error,
+      "Não foi possível gerar a senha temporária."
+    );
+
+    setErro(mensagemErro);
+    setAlterandoId("");
+    return;
+  }
+
+  setSenhaTemporaria({
+    email: cliente.email,
+    senha: data.senhaTemporaria,
+  });
+
+  setAlterandoId("");
+}
+
+async function copiarSenhaTemporaria() {
+  if (!senhaTemporaria?.senha) {
+    return;
+  }
+
+  await navigator.clipboard.writeText(
+    senhaTemporaria.senha
+  );
+
+  setMensagem("Senha temporária copiada!");
+}
 
   async function alterarAcesso(cliente) {
     const clienteAtivo = cliente.status === "ativa";
@@ -386,7 +437,37 @@ function AdminPlataforma() {
             {mensagem}
           </p>
         )}
+{senhaTemporaria && (
+  <section className="plataforma-senha-temporaria">
+    <div>
+      <span>
+        <KeyRound size={21} />
+      </span>
 
+      <div>
+        <p>Senha temporária gerada</p>
+        <strong>{senhaTemporaria.email}</strong>
+      </div>
+    </div>
+
+    <div className="plataforma-senha-campo">
+      <code>{senhaTemporaria.senha}</code>
+
+      <button
+        type="button"
+        onClick={copiarSenhaTemporaria}
+      >
+        <Copy size={17} />
+        Copiar senha
+      </button>
+    </div>
+
+    <small>
+      Essa senha é exibida somente agora. Depois de concluir o
+      catálogo, peça ao cliente para redefinir a senha.
+    </small>
+  </section>
+)}
         <section className="plataforma-clientes">
           <div className="plataforma-clientes-topo">
             <div>
@@ -514,6 +595,19 @@ function AdminPlataforma() {
                         </td>
 
                         <td>
+                           <button
+    className="plataforma-senha"
+    type="button"
+    onClick={() =>
+      gerarSenhaTemporaria(cliente)
+    }
+    disabled={alterandoId === cliente.id}
+  >
+    <KeyRound size={16} />
+    Gerar senha
+  </button>
+
+
                           <button
                             className={
                               clienteAtivo
