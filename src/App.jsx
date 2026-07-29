@@ -1,19 +1,16 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CarrinhoProvider } from "./contexts/CarrinhoContext";
 
-
 import RotaAssinante from "./components/RotaAssinante";
-import RotaProtegida from "./components/RotaProtegida";
-
-import Planos from "./pages/Planos";
-import PagamentoSucesso from "./pages/PagamentoSucesso";
-import Assinar from "./pages/Assinar";
-import MinhaAssinatura from "./pages/MinhaAssinatura";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Cadastro from "./pages/Cadastro";
 import Admin from "./pages/Admin";
 
 import CriarEmpresa from "./pages/CriarEmpresa";
@@ -39,11 +36,6 @@ function App() {
             <Route path="/login" element={<Login />} />
 
             <Route
-              path="/cadastro"
-              element={<Cadastro />}
-            />
-
-            <Route
               path="/esqueci-senha"
               element={<EsqueciSenha />}
             />
@@ -54,19 +46,10 @@ function App() {
             />
 
             <Route
-  path="/assinar"
-  element={
-    <RotaProtegida>
-      <Assinar />
-    </RotaProtegida>
-  }
-/>
-
-            <Route
               path="/catalogo/:slug"
               element={<Catalogo />}
             />
-<Route path="/planos" element={<Planos />} />
+
             <Route
               path="/admin"
               element={
@@ -84,24 +67,6 @@ function App() {
                 </RotaAssinante>
               }
             />
-
-            <Route
-  path="/minha-assinatura"
-  element={
-    <RotaProtegida>
-      <MinhaAssinatura />
-    </RotaProtegida>
-  }
-/>
-
-            <Route
-  path="/pagamento-sucesso"
-  element={
-    <RotaProtegida>
-      <PagamentoSucesso />
-    </RotaProtegida>
-  }
-/>
 
             <Route
               path="/admin/produtos"
@@ -146,6 +111,36 @@ function App() {
                   <ConfiguracoesEmpresa />
                 </RotaAssinante>
               }
+            />
+
+            <Route
+              path="/cadastro"
+              element={<Navigate to="/" replace />}
+            />
+
+            <Route
+              path="/planos"
+              element={<Navigate to="/" replace />}
+            />
+
+            <Route
+              path="/assinar"
+              element={<Navigate to="/" replace />}
+            />
+
+            <Route
+              path="/pagamento-sucesso"
+              element={<Navigate to="/" replace />}
+            />
+
+            <Route
+              path="/minha-assinatura"
+              element={<Navigate to="/admin" replace />}
+            />
+
+            <Route
+              path="*"
+              element={<Navigate to="/" replace />}
             />
           </Routes>
         </BrowserRouter>

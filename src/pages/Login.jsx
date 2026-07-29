@@ -20,6 +20,12 @@ function Login() {
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState("");
 
+  const mensagemWhatsApp = encodeURIComponent(
+    "Olá! Conheci o Marcatalog e gostaria de solicitar acesso e saber mais sobre a criação do meu catálogo."
+  );
+
+  const linkWhatsApp = `https://wa.me/5511939412790?text=${mensagemWhatsApp}`;
+
   async function entrar(evento) {
     evento.preventDefault();
 
@@ -163,8 +169,14 @@ function Login() {
           </form>
 
           <p className="auth-alternativa">
-            Ainda não possui uma conta?{" "}
-            <Link to="/cadastro">Criar conta gratuitamente</Link>
+            Ainda não é cliente?{" "}
+            <a
+              href={linkWhatsApp}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Solicitar acesso
+            </a>
           </p>
 
           <Link to="/" className="auth-voltar">

@@ -5,10 +5,10 @@ import {
   Boxes,
   CheckCircle2,
   Copy,
-  CreditCard,
   ExternalLink,
   LayoutDashboard,
   LogOut,
+  MessageCircle,
   Package,
   PackagePlus,
   Settings,
@@ -122,6 +122,16 @@ function Admin() {
 
   const linkCatalogo = `${window.location.origin}/catalogo/${empresa.slug}`;
 
+  const mensagemSuporte = encodeURIComponent(
+    `Olá! Preciso de ajuda com o catálogo da empresa ${empresa.nome}.`
+  );
+
+  const linkSuporte = `https://wa.me/5511939412790?text=${mensagemSuporte}`;
+
+  function abrirSuporte() {
+    window.location.href = linkSuporte;
+  }
+
   return (
     <main className="admin-pagina">
       <aside className="admin-sidebar">
@@ -170,12 +180,10 @@ function Admin() {
 
             <button
               type="button"
-              onClick={() =>
-                navigate("/minha-assinatura")
-              }
+              onClick={abrirSuporte}
             >
-              <CreditCard size={19} />
-              Minha assinatura
+              <MessageCircle size={19} />
+              Suporte
             </button>
           </nav>
         </div>
@@ -386,18 +394,16 @@ function Admin() {
 
             <button
               type="button"
-              onClick={() =>
-                navigate("/minha-assinatura")
-              }
+              onClick={abrirSuporte}
             >
               <span>
-                <CreditCard size={23} />
+                <MessageCircle size={23} />
               </span>
 
               <div>
-                <strong>Minha assinatura</strong>
+                <strong>Falar com o suporte</strong>
                 <small>
-                  Consulte seu plano e renovação
+                  Tire dúvidas sobre seu catálogo
                 </small>
               </div>
             </button>
