@@ -9,6 +9,12 @@ import {
 import "./Home.css";
 
 function Home() {
+  const mensagemWhatsApp = encodeURIComponent(
+    "Olá! Conheci o Marcatalog e gostaria de solicitar acesso e saber mais sobre a criação do meu catálogo."
+  );
+
+  const linkWhatsApp = `https://wa.me/5511939412790?text=${mensagemWhatsApp}`;
+
   return (
     <main className="home">
       <header className="home-header">
@@ -30,9 +36,14 @@ function Home() {
             Entrar
           </Link>
 
-          <Link to="/cadastro" className="botao-cereja">
-            Criar meu catálogo
-          </Link>
+          <a
+            href={linkWhatsApp}
+            className="botao-cereja"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Solicitar acesso
+          </a>
         </div>
       </header>
 
@@ -52,15 +63,20 @@ function Home() {
           </h1>
 
           <p className="home-descricao">
-            Crie um catálogo digital com carrinho de compras e
-            receba os pedidos diretamente pelo WhatsApp.
+            Tenha um catálogo digital profissional com carrinho de
+            compras e receba os pedidos diretamente pelo WhatsApp.
           </p>
 
           <div className="home-hero-acoes">
-            <Link to="/cadastro" className="botao-cereja botao-grande">
-              Criar meu catálogo
+            <a
+              href={linkWhatsApp}
+              className="botao-cereja botao-grande"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Solicitar meu catálogo
               <ArrowRight size={19} />
-            </Link>
+            </a>
 
             <a href="#como-funciona" className="botao-secundario">
               Ver como funciona
@@ -70,17 +86,17 @@ function Home() {
           <div className="home-beneficios">
             <span>
               <Check size={16} />
-              Fácil de configurar
+              Acesso exclusivo
             </span>
 
             <span>
               <Check size={16} />
-              Link exclusivo
+              Link personalizado
             </span>
 
             <span>
               <Check size={16} />
-              Sem pagamento online
+              Pedidos sem comissão
             </span>
           </div>
         </div>
@@ -197,8 +213,8 @@ function Home() {
       </section>
 
       <section id="como-funciona" className="home-como-funciona">
-        <p>Comece em poucos passos</p>
-        <h2>Você cadastra. Compartilha. Vende.</h2>
+        <p>Acesso exclusivo e acompanhado</p>
+        <h2>Solicite. Configure. Compartilhe. Venda.</h2>
       </section>
     </main>
   );
