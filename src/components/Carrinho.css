@@ -359,3 +359,252 @@
     width: 100%;
   }
 }
+
+/* Seleção de vendedor */
+
+.carrinho-vendedor {
+  display: grid;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.carrinho-vendedor label {
+  color: #514045;
+  font-size: 0.68rem;
+}
+
+.carrinho-vendedor > div {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carrinho-vendedor svg {
+  position: absolute;
+  z-index: 1;
+  left: 13px;
+  color: #8b777c;
+  pointer-events: none;
+}
+
+.carrinho-vendedor select {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid #dfd1c2;
+  border-radius: 9px;
+  padding: 0 38px 0 41px;
+  background: #f8f3ed;
+  color: #2a1c20;
+  cursor: pointer;
+}
+
+.carrinho-vendedor select:focus {
+  border-color: var(--cor-cereja);
+  outline: 3px solid
+    rgba(var(--catalogo-acento-rgb), 0.1);
+}
+
+.carrinho-atendente {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 14px;
+  border: 1px solid
+    rgba(var(--catalogo-acento-rgb), 0.16);
+  border-radius: 10px;
+  padding: 11px 12px;
+  background: rgba(
+    var(--catalogo-acento-rgb),
+    0.07
+  );
+}
+
+.carrinho-atendente > span {
+  width: 37px;
+  height: 37px;
+  flex: 0 0 37px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: rgba(
+    var(--catalogo-acento-rgb),
+    0.12
+  );
+  color: var(--cor-cereja);
+}
+
+.carrinho-atendente > div {
+  display: grid;
+  gap: 3px;
+}
+
+.carrinho-atendente small {
+  color: #7c686d;
+  font-size: 0.61rem;
+}
+
+.carrinho-atendente strong {
+  color: #2a1c20;
+  font-size: 0.76rem;
+}
+
+/* Tema escuro do carrinho */
+
+.catalogo-tema-escuro .carrinho-painel {
+  background: #141011;
+  color: #f8efe4;
+  box-shadow: -25px 0 60px rgba(0, 0, 0, 0.5);
+}
+
+.catalogo-tema-escuro .carrinho-topo {
+  border-bottom-color: rgba(248, 239, 228, 0.1);
+}
+
+.catalogo-tema-escuro
+  .carrinho-topo
+  > div
+  > span {
+  background: rgba(
+    var(--catalogo-acento-rgb),
+    0.16
+  );
+}
+
+.catalogo-tema-escuro .carrinho-topo h2,
+.catalogo-tema-escuro
+  .carrinho-item-informacao
+  h3,
+.catalogo-tema-escuro .carrinho-vazio h3 {
+  color: #fff8ee;
+}
+
+.catalogo-tema-escuro .carrinho-topo p,
+.catalogo-tema-escuro
+  .carrinho-item-informacao
+  > p,
+.catalogo-tema-escuro .carrinho-total span,
+.catalogo-tema-escuro .carrinho-vazio p {
+  color: #a99da1;
+}
+
+.catalogo-tema-escuro
+  .carrinho-topo
+  > button {
+  border-color: rgba(248, 239, 228, 0.11);
+  color: #c9bec1;
+}
+
+.catalogo-tema-escuro
+  .carrinho-topo
+  > button:hover {
+  background: #292224;
+}
+
+.catalogo-tema-escuro .carrinho-item {
+  border-color: rgba(248, 239, 228, 0.1);
+  background: #1b1617;
+}
+
+.catalogo-tema-escuro
+  .carrinho-item-imagem {
+  background: #272123;
+  color: #918589;
+}
+
+.catalogo-tema-escuro
+  .carrinho-quantidade {
+  border-color: rgba(248, 239, 228, 0.11);
+}
+
+.catalogo-tema-escuro
+  .carrinho-quantidade
+  span {
+  color: #f8efe4;
+}
+
+.catalogo-tema-escuro
+  .carrinho-quantidade
+  button:hover {
+  background: #2d2628;
+}
+
+.catalogo-tema-escuro
+  .carrinho-finalizacao {
+  border-top-color: rgba(248, 239, 228, 0.1);
+  background: #1b1617;
+}
+
+.catalogo-tema-escuro .carrinho-nome label,
+.catalogo-tema-escuro
+  .carrinho-vendedor
+  label {
+  color: #c9bec1;
+}
+
+.catalogo-tema-escuro .carrinho-nome svg,
+.catalogo-tema-escuro
+  .carrinho-vendedor
+  svg {
+  color: #918589;
+}
+
+.catalogo-tema-escuro .carrinho-nome input,
+.catalogo-tema-escuro
+  .carrinho-vendedor
+  select {
+  border-color: rgba(248, 239, 228, 0.11);
+  background: #272123;
+  color: #f8efe4;
+}
+
+.catalogo-tema-escuro
+  .carrinho-nome
+  input::placeholder {
+  color: #81767a;
+}
+
+.catalogo-tema-escuro
+  .carrinho-vendedor
+  select
+  option {
+  background: #272123;
+  color: #f8efe4;
+}
+
+.catalogo-tema-escuro .carrinho-atendente {
+  border-color: rgba(
+    var(--catalogo-acento-rgb),
+    0.24
+  );
+  background: rgba(
+    var(--catalogo-acento-rgb),
+    0.11
+  );
+}
+
+.catalogo-tema-escuro
+  .carrinho-atendente
+  small {
+  color: #a99da1;
+}
+
+.catalogo-tema-escuro
+  .carrinho-atendente
+  strong {
+  color: #fff8ee;
+}
+
+.catalogo-tema-escuro
+  .carrinho-limpar:hover {
+  background: #292224;
+}
+
+@media (max-width: 500px) {
+  .carrinho-finalizacao {
+    padding: 16px 17px 20px;
+  }
+
+  .carrinho-vendedor select {
+    font-size: 0.76rem;
+  }
+}
