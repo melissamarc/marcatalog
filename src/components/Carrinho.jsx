@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MessageCircle,
   Minus,
@@ -7,12 +7,13 @@ import {
   ShoppingCart,
   Trash2,
   User,
+  UsersRound,
   X,
 } from "lucide-react";
 import { useCarrinho } from "../contexts/CarrinhoContext";
 import "./Carrinho.css";
 
-function Carrinho({ empresa }) {
+function Carrinho({ empresa, vendedores = [] }) {
   const {
     carrinho,
     alterarQuantidade,
@@ -22,7 +23,25 @@ function Carrinho({ empresa }) {
 
   const [aberto, setAberto] = useState(false);
   const [nomeCliente, setNomeCliente] = useState("");
+  const [vendedorSelecionadoId, setVendedorSelecionadoId] =
+    useState("");
   const [erro, setErro] = useState("");
+
+  useEffect(() => {
+    if (vendedores.length === 1) {
+      setVendedorSelecionadoId(vendedores[0].id);
+      return;
+    }
+
+    const vendedorAindaExiste = vendedores.some(
+      (vendedor) =>
+        vendedor.id === vendedorSelecionadoId
+    );
+
+    if (!vendedorAindaExiste) {
+      setVendedorSelecionadoId("");
+    }
+  }, [vendedores, vendedorSelecionadoId]);
 
   const itens =
     carrinho.catalogoSlug === empresa.slug
@@ -40,6 +59,11 @@ function Carrinho({ empresa }) {
     0
   );
 
+  const vendedorSelecionado = vendedores.find(
+    (vendedor) =>
+      vendedor.id === vendedorSelecionadoId
+  );
+
   function formatarPreco(valor) {
     return Number(valor).toLocaleString("pt-BR", {
       style: "currency",
@@ -48,6 +72,8 @@ function Carrinho({ empresa }) {
   }
 
   function enviarPedido() {
+    setErro("");
+
     if (!nomeCliente.trim()) {
       setErro("Informe seu nome antes de enviar o pedido.");
       return;
@@ -55,6 +81,16 @@ function Carrinho({ empresa }) {
 
     if (itens.length === 0) {
       setErro("Adicione pelo menos um produto ao carrinho.");
+      return;
+    }
+
+    if (
+      vendedores.length > 1 &&
+      !vendedorSelecionado
+    ) {
+      setErro(
+        "Selecione o vendedor que irá atender seu pedido."
+      );
       return;
     }
 
@@ -73,7 +109,11 @@ function Carrinho({ empresa }) {
       })
       .join("\n");
 
-    const mensagem = `Olá! Gostaria de solicitar um orçamento.
+    const saudacao = vendedorSelecionado
+      ? `Olá, ${vendedorSelecionado.nome}!`
+      : "Olá!";
+
+    const mensagem = `${saudacao} Gostaria de solicitar um orçamento.
 
 Nome: ${nomeCliente.trim()}
 
@@ -82,10 +122,22 @@ ${produtosMensagem}
 
 Total: ${formatarPreco(valorTotal)}`;
 
-    const numeroDigitado = empresa.whatsapp.replace(
+    const whatsappDestino =
+      vendedorSelecionado?.whatsapp ||
+      empresa.whatsapp ||
+      "";
+
+    const numeroDigitado = whatsappDestino.replace(
       /\D/g,
       ""
     );
+
+    if (!numeroDigitado) {
+      setErro(
+        "O WhatsApp para recebimento do pedido não está configurado."
+      );
+      return;
+    }
 
     const numeroWhatsapp = numeroDigitado.startsWith("55")
       ? numeroDigitado
@@ -125,7 +177,9 @@ Total: ${formatarPreco(valorTotal)}`;
         >
           <aside
             className="carrinho-painel"
-            onClick={(evento) => evento.stopPropagation()}
+            onClick={(evento) =>
+              evento.stopPropagation()
+            }
           >
             <header className="carrinho-topo">
               <div>
@@ -199,7 +253,10 @@ Total: ${formatarPreco(valorTotal)}`;
                         {item.variacaoSelecionada && (
                           <p>
                             Opção:{" "}
-                            {item.variacaoSelecionada.nome}
+                            {
+                              item.variacaoSelecionada
+                                .nome
+                            }
                           </p>
                         )}
 
@@ -221,7 +278,9 @@ Total: ${formatarPreco(valorTotal)}`;
                               <Minus size={15} />
                             </button>
 
-                            <span>{item.quantidade}</span>
+                            <span>
+                              {item.quantidade}
+                            </span>
 
                             <button
                               type="button"
@@ -257,6 +316,7 @@ Total: ${formatarPreco(valorTotal)}`;
                 <footer className="carrinho-finalizacao">
                   <div className="carrinho-total">
                     <span>Total estimado</span>
+
                     <strong>
                       {formatarPreco(valorTotal)}
                     </strong>
@@ -284,6 +344,62 @@ Total: ${formatarPreco(valorTotal)}`;
                       />
                     </div>
                   </div>
+
+                  {vendedores.length > 1 && (
+                    <div className="carrinho-vendedor">
+                      <label htmlFor="vendedor">
+                        Escolha seu vendedor
+                      </label>
+
+                      <div>
+                        <UsersRound size={18} />
+
+                        <select
+                          id="vendedor"
+                          value={vendedorSelecionadoId}
+                          onChange={(evento) => {
+                            setVendedorSelecionadoId(
+                              evento.target.value
+                            );
+                            setErro("");
+                          }}
+                        >
+                          <option value="">
+                            Selecione um vendedor
+                          </option>
+
+                          {vendedores.map(
+                            (vendedor) => (
+                              <option
+                                key={vendedor.id}
+                                value={vendedor.id}
+                              >
+                                {vendedor.nome}
+                              </option>
+                            )
+                          )}
+                        </select>
+                      </div>
+                    </div>
+                  )}
+
+                  {vendedores.length === 1 && (
+                    <div className="carrinho-atendente">
+                      <span>
+                        <UsersRound size={18} />
+                      </span>
+
+                      <div>
+                        <small>
+                          Seu atendimento será com
+                        </small>
+
+                        <strong>
+                          {vendedores[0].nome}
+                        </strong>
+                      </div>
+                    </div>
+                  )}
 
                   {erro && (
                     <p className="carrinho-erro">
