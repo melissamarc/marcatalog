@@ -19,11 +19,15 @@ function Catalogo() {
   const [busca, setBusca] = useState("");
   const [categoria, setCategoria] = useState("");
   const [marca, setMarca] = useState("");
+  const [ordenacao, setOrdenacao] = useState("recentes");
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
 
   useEffect(() => {
     async function carregarCatalogo() {
+      setCarregando(true);
+      setErro("");
+
       const { data: dadosEmpresa, error: erroEmpresa } =
         await supabase
           .from("empresas")
@@ -32,7 +36,7 @@ function Catalogo() {
           .eq("ativo", true)
           .single();
 
-      if (erroEmpresa) {
+      if (erroEmpresa || !dadosEmpresa) {
         setErro("Catálogo não encontrado.");
         setCarregando(false);
         return;
@@ -63,83 +67,140 @@ function Catalogo() {
   const categorias = useMemo(() => {
     return [
       ...new Set(
-        produtos.map((produto) => produto.categoria)
+        produtos
+          .map((produto) => produto.categoria)
+          .filter(Boolean)
       ),
-    ]
-      .filter(Boolean)
-      .sort();
+    ].sort((categoriaA, categoriaB) =>
+      categoriaA.localeCompare(categoriaB, "pt-BR")
+    );
   }, [produtos]);
 
   const marcas = useMemo(() => {
     return [
-      ...new Set(produtos.map((produto) => produto.marca)),
-    ]
-      .filter(Boolean)
-      .sort();
+      ...new Set(
+        produtos
+          .map((produto) => produto.marca)
+          .filter(Boolean)
+      ),
+    ].sort((marcaA, marcaB) =>
+      marcaA.localeCompare(marcaB, "pt-BR")
+    );
   }, [produtos]);
 
   const produtosFiltrados = useMemo(() => {
-    const buscaNormalizada = busca.toLowerCase().trim();
+    const buscaNormalizada = busca
+      .toLocaleLowerCase("pt-BR")
+      .trim();
 
-    return produtos.filter((produto) => {
-      const correspondeBusca =
-        !buscaNormalizada ||
-        produto.nome
-          .toLowerCase()
-          .includes(buscaNormalizada) ||
-        produto.descricao
-          ?.toLowerCase()
-          .includes(buscaNormalizada);
+    const produtosEncontrados = produtos.filter(
+      (produto) => {
+        const nome = produto.nome
+          ?.toLocaleLowerCase("pt-BR") ?? "";
 
-      const correspondeCategoria =
-        !categoria || produto.categoria === categoria;
+        const descricao = produto.descricao
+          ?.toLocaleLowerCase("pt-BR") ?? "";
 
-      const correspondeMarca =
-        !marca || produto.marca === marca;
+        const correspondeBusca =
+          !buscaNormalizada ||
+          nome.includes(buscaNormalizada) ||
+          descricao.includes(buscaNormalizada);
 
-      return (
-        correspondeBusca &&
-        correspondeCategoria &&
-        correspondeMarca
-      );
-    });
-  }, [produtos, busca, categoria, marca]);
+        const correspondeCategoria =
+          !categoria || produto.categoria === categoria;
+
+        const correspondeMarca =
+          !marca || produto.marca === marca;
+
+        return (
+          correspondeBusca &&
+          correspondeCategoria &&
+          correspondeMarca
+        );
+      }
+    );
+
+    return [...produtosEncontrados].sort(
+      (produtoA, produtoB) => {
+        if (ordenacao === "antigos") {
+          return (
+            new Date(produtoA.criado_em).getTime() -
+            new Date(produtoB.criado_em).getTime()
+          );
+        }
+
+        if (ordenacao === "menor-preco") {
+          return (
+            Number(produtoA.preco ?? 0) -
+            Number(produtoB.preco ?? 0)
+          );
+        }
+
+        if (ordenacao === "maior-preco") {
+          return (
+            Number(produtoB.preco ?? 0) -
+            Number(produtoA.preco ?? 0)
+          );
+        }
+
+        if (ordenacao === "nome") {
+          return (produtoA.nome ?? "").localeCompare(
+            produtoB.nome ?? "",
+            "pt-BR"
+          );
+        }
+
+        return (
+          new Date(produtoB.criado_em).getTime() -
+          new Date(produtoA.criado_em).getTime()
+        );
+      }
+    );
+  }, [produtos, busca, categoria, marca, ordenacao]);
 
   function limparFiltros() {
     setBusca("");
     setCategoria("");
     setMarca("");
+    setOrdenacao("recentes");
   }
 
   if (carregando) {
     return (
       <main className="catalogo-carregando">
         <div />
+
         <p>Carregando catálogo...</p>
       </main>
     );
   }
 
-  if (erro) {
+  if (erro || !empresa) {
     return (
       <main className="catalogo-nao-encontrado">
         <Store size={40} />
+
         <h1>Marcatalog</h1>
-        <p>{erro}</p>
+
+        <p>{erro || "Catálogo não encontrado."}</p>
       </main>
     );
   }
 
-  const possuiFiltros = busca || categoria || marca;
+  const possuiFiltros =
+    busca ||
+    categoria ||
+    marca ||
+    ordenacao !== "recentes";
 
   return (
     <main
-  className={`catalogo-pagina catalogo-tema-${
-    empresa.tema_catalogo ?? "claro"
-  } catalogo-cor-${
-    empresa.cor_catalogo ?? "cereja"
-  }`}
->
+      className={`catalogo-pagina catalogo-tema-${
+        empresa.tema_catalogo ?? "claro"
+      } catalogo-cor-${
+        empresa.cor_catalogo ?? "cereja"
+      }`}
+    >
       <header className="catalogo-header">
         <div className="catalogo-header-conteudo">
           <div className="catalogo-empresa">
@@ -158,6 +219,7 @@ function Catalogo() {
 
             <div>
               <small>Catálogo digital</small>
+
               <h1>{empresa.nome}</h1>
             </div>
           </div>
@@ -165,17 +227,6 @@ function Catalogo() {
           <Carrinho empresa={empresa} />
         </div>
       </header>
-
-      <section className="catalogo-apresentacao">
-        <div>
-          <p>Bem-vindo ao nosso catálogo</p>
-          <h2>Encontre tudo o que você precisa.</h2>
-          <span>
-            Escolha os produtos, monte seu carrinho e envie o
-            orçamento pelo WhatsApp.
-          </span>
-        </div>
-      </section>
 
       <section className="catalogo-filtros-container">
         <div className="catalogo-busca">
@@ -203,6 +254,7 @@ function Catalogo() {
             onChange={(evento) =>
               setCategoria(evento.target.value)
             }
+            aria-label="Filtrar por categoria"
           >
             <option value="">Todas as categorias</option>
 
@@ -221,18 +273,53 @@ function Catalogo() {
             onChange={(evento) =>
               setMarca(evento.target.value)
             }
+            aria-label="Filtrar por marca"
           >
             <option value="">Todas as marcas</option>
 
             {marcas.map((nomeMarca) => (
-              <option key={nomeMarca} value={nomeMarca}>
+              <option
+                key={nomeMarca}
+                value={nomeMarca}
+              >
                 {nomeMarca}
               </option>
             ))}
           </select>
 
+          <select
+            value={ordenacao}
+            onChange={(evento) =>
+              setOrdenacao(evento.target.value)
+            }
+            aria-label="Ordenar produtos"
+          >
+            <option value="recentes">
+              Mais recentes
+            </option>
+
+            <option value="antigos">
+              Mais antigos
+            </option>
+
+            <option value="menor-preco">
+              Menor preço
+            </option>
+
+            <option value="maior-preco">
+              Maior preço
+            </option>
+
+            <option value="nome">
+              Nome de A a Z
+            </option>
+          </select>
+
           {possuiFiltros && (
-            <button type="button" onClick={limparFiltros}>
+            <button
+              type="button"
+              onClick={limparFiltros}
+            >
               Limpar
             </button>
           )}
@@ -243,6 +330,7 @@ function Catalogo() {
         <div className="catalogo-produtos-topo">
           <div>
             <p>Nossa seleção</p>
+
             <h2>Produtos</h2>
           </div>
 
@@ -266,7 +354,10 @@ function Catalogo() {
               Tente pesquisar outro nome ou remova os filtros.
             </p>
 
-            <button type="button" onClick={limparFiltros}>
+            <button
+              type="button"
+              onClick={limparFiltros}
+            >
               Limpar filtros
             </button>
           </div>
