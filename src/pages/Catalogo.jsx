@@ -22,6 +22,7 @@ function Catalogo() {
   const [ordenacao, setOrdenacao] = useState("recentes");
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
+const [vendedores, setVendedores] = useState([]);
 
   useEffect(() => {
     async function carregarCatalogo() {
@@ -56,8 +57,23 @@ function Catalogo() {
         return;
       }
 
+      const { data: dadosVendedores, error: erroVendedores } =
+  await supabase
+    .from("vendedores")
+    .select("id, nome, whatsapp")
+    .eq("empresa_id", dadosEmpresa.id)
+    .eq("ativo", true)
+    .order("nome", { ascending: true });
+
+if (erroVendedores) {
+  setErro("Não foi possível carregar os vendedores.");
+  setCarregando(false);
+  return;
+}
+
       setEmpresa(dadosEmpresa);
       setProdutos(dadosProdutos ?? []);
+      setVendedores(dadosVendedores ?? []);
       setCarregando(false);
     }
 
@@ -224,7 +240,10 @@ function Catalogo() {
             </div>
           </div>
 
-          <Carrinho empresa={empresa} />
+         <Carrinho
+  empresa={empresa}
+  vendedores={vendedores}
+/>
         </div>
       </header>
 

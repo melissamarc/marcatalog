@@ -21,6 +21,7 @@ import AdicionarProduto from "./pages/AdicionarProduto";
 import GerenciarProdutos from "./pages/GerenciarProdutos";
 import EditarProduto from "./pages/EditarProduto";
 import VariacoesProduto from "./pages/VariacoesProduto";
+import GerenciarVendedores from "./pages/GerenciarVendedores";
 
 import ConfiguracoesEmpresa from "./pages/ConfiguracoesEmpresa";
 import Catalogo from "./pages/Catalogo";
@@ -71,6 +72,15 @@ function App() {
                 </RotaAssinante>
               }
             />
+
+<Route
+  path="/admin/vendedores"
+  element={
+    <RotaAssinante>
+      <GerenciarVendedores />
+    </RotaAssinante>
+  }
+/>
 
             <Route
               path="/admin/produtos"

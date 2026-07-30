@@ -15,6 +15,7 @@ import {
   Settings,
   Store,
   Tags,
+  UsersRound,
   XCircle,
 } from "lucide-react";
 import { supabase } from "../services/supabase";
@@ -167,6 +168,14 @@ function Admin() {
               <PackagePlus size={19} />
               Adicionar produto
             </button>
+
+<button
+  type="button"
+  onClick={() => navigate("/admin/vendedores")}
+>
+  <UsersRound size={19} />
+  Vendedores
+</button>
 
             <button
               type="button"
@@ -384,6 +393,23 @@ function Admin() {
                 </small>
               </div>
             </button>
+
+<button
+  type="button"
+  onClick={() => navigate("/admin/vendedores")}
+>
+  <span>
+    <UsersRound size={23} />
+  </span>
+
+  <div>
+    <strong>Gerenciar vendedores</strong>
+
+    <small>
+      Cadastre quem receberá os pedidos
+    </small>
+  </div>
+</button>
 
             <button
               type="button"
