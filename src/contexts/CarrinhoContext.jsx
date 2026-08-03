@@ -1,4 +1,9 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 const CarrinhoContext = createContext();
 
@@ -6,7 +11,9 @@ const CHAVE_CARRINHO = "marcatalog-carrinho";
 
 function carregarCarrinhoSalvo() {
   try {
-    const carrinhoSalvo = localStorage.getItem(CHAVE_CARRINHO);
+    const carrinhoSalvo = localStorage.getItem(
+      CHAVE_CARRINHO
+    );
 
     if (!carrinhoSalvo) {
       return {
@@ -52,7 +59,8 @@ export function CarrinhoProvider({ children }) {
         : produto.id;
 
       const produtoExistente = itensAtuais.find(
-        (item) => item.chaveCarrinho === chaveCarrinho
+        (item) =>
+          item.chaveCarrinho === chaveCarrinho
       );
 
       if (produtoExistente) {
@@ -62,7 +70,8 @@ export function CarrinhoProvider({ children }) {
             item.chaveCarrinho === chaveCarrinho
               ? {
                   ...item,
-                  quantidade: item.quantidade + 1,
+                  quantidade:
+                    item.quantidade + 1,
                 }
               : item
           ),
@@ -73,6 +82,11 @@ export function CarrinhoProvider({ children }) {
         ? Number(variacao.valor_adicional)
         : 0;
 
+      const imagemFinal =
+        variacao?.imagem_url ||
+        produto.imagem_url ||
+        null;
+
       return {
         catalogoSlug,
         itens: [
@@ -80,7 +94,10 @@ export function CarrinhoProvider({ children }) {
           {
             ...produto,
             chaveCarrinho,
-            preco: Number(produto.preco) + valorAdicional,
+            preco:
+              Number(produto.preco) +
+              valorAdicional,
+            imagem_url: imagemFinal,
             variacaoSelecionada: variacao,
             quantidade: 1,
           },
@@ -89,7 +106,10 @@ export function CarrinhoProvider({ children }) {
     });
   }
 
-  function alterarQuantidade(chaveCarrinho, quantidade) {
+  function alterarQuantidade(
+    chaveCarrinho,
+    quantidade
+  ) {
     if (quantidade <= 0) {
       removerProduto(chaveCarrinho);
       return;
@@ -99,7 +119,10 @@ export function CarrinhoProvider({ children }) {
       ...carrinhoAtual,
       itens: carrinhoAtual.itens.map((item) =>
         item.chaveCarrinho === chaveCarrinho
-          ? { ...item, quantidade }
+          ? {
+              ...item,
+              quantidade,
+            }
           : item
       ),
     }));
@@ -109,7 +132,8 @@ export function CarrinhoProvider({ children }) {
     setCarrinho((carrinhoAtual) => ({
       ...carrinhoAtual,
       itens: carrinhoAtual.itens.filter(
-        (item) => item.chaveCarrinho !== chaveCarrinho
+        (item) =>
+          item.chaveCarrinho !== chaveCarrinho
       ),
     }));
   }
@@ -122,13 +146,15 @@ export function CarrinhoProvider({ children }) {
   }
 
   const quantidadeTotal = carrinho.itens.reduce(
-    (total, item) => total + item.quantidade,
+    (total, item) =>
+      total + item.quantidade,
     0
   );
 
   const valorTotal = carrinho.itens.reduce(
     (total, item) =>
-      total + Number(item.preco) * item.quantidade,
+      total +
+      Number(item.preco) * item.quantidade,
     0
   );
 
