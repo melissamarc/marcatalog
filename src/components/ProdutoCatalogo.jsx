@@ -97,14 +97,6 @@ function ProdutoCatalogo({ produto, empresa }) {
       </div>
 
       <div className="catalogo-produto-conteudo">
-        <div className="catalogo-produto-etiquetas">
-          <span>{produto.categoria}</span>
-
-          {produto.marca && (
-            <span>{produto.marca}</span>
-          )}
-        </div>
-
         <h3>{produto.nome}</h3>
 
         {produto.descricao && (
@@ -148,32 +140,7 @@ function ProdutoCatalogo({ produto, empresa }) {
                       selecionarVariacao(variacao)
                     }
                   >
-                    {variacao.imagem_url && (
-                      <img
-                        src={variacao.imagem_url}
-                        alt=""
-                      />
-                    )}
-
                     <span>{variacao.nome}</span>
-
-                    {Number(
-                      variacao.valor_adicional
-                    ) > 0 && (
-                      <small>
-                        +
-                        {formatarPreco(
-                          variacao.valor_adicional
-                        )}
-                      </small>
-                    )}
-
-                    {estaSelecionada && (
-                      <Check
-                        className="catalogo-variacao-check"
-                        size={13}
-                      />
-                    )}
                   </button>
                 );
               })}
