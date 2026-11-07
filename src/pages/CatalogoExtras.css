@@ -1,0 +1,649 @@
+/* ============================================================
+   CatÃ¡logo: melhorias de usabilidade
+   (cabeÃ§alho fixo, categorias em pÃ­lulas, painel de filtros,
+   selos, preÃ§o promocional). Usa as mesmas cores do tema.
+   ============================================================ */
+
+/* CabeÃ§alho sempre visÃ­vel ao rolar */
+.catalogo-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* Barra de busca + botÃ£o de filtros */
+.catalogo-filtros-container {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.catalogo-filtros .catalogo-botao-filtros {
+  position: relative;
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #dfd1c2;
+  padding: 0 18px;
+  background: transparent;
+  color: var(--cor-cereja);
+  font-weight: 700;
+}
+
+.catalogo-botao-filtros strong {
+  min-width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 99px;
+  padding: 0 6px;
+  background: var(--cor-cereja);
+  color: white;
+  font-size: 0.7rem;
+}
+
+/* Categorias em pÃ­lulas */
+.catalogo-categorias {
+  width: min(1240px, calc(100% - 40px));
+  margin: 18px auto 0;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 2px 8px;
+  scrollbar-width: none;
+}
+
+.catalogo-categorias::-webkit-scrollbar {
+  display: none;
+}
+
+.catalogo-categorias button {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #dfd1c2;
+  border-radius: 999px;
+  padding: 9px 17px;
+  background: white;
+  color: #5b484d;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.catalogo-categorias button:hover {
+  border-color: var(--cor-cereja);
+}
+
+.catalogo-categorias button.ativa {
+  border-color: var(--cor-cereja);
+  background: var(--cor-cereja);
+  color: white;
+}
+
+/* Painel de filtros (lateral no computador, de baixo no celular) */
+.catalogo-painel-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.catalogo-painel-fundo.aberto {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.catalogo-painel-filtros {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1001;
+  width: min(390px, 100%);
+  display: flex;
+  flex-direction: column;
+  background: white;
+  color: #2a1c20;
+  box-shadow: -18px 0 45px rgba(0, 0, 0, 0.25);
+  transform: translateX(105%);
+  transition: transform 0.25s ease;
+}
+
+.catalogo-painel-filtros.aberto {
+  transform: none;
+}
+
+.catalogo-painel-filtros > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e8ddd1;
+  padding: 18px 20px;
+}
+
+.catalogo-painel-filtros > header h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.catalogo-painel-filtros > header button {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.catalogo-painel-corpo {
+  flex: 1;
+  overflow-y: auto;
+  display: grid;
+  align-content: start;
+  gap: 22px;
+  padding: 20px;
+}
+
+.catalogo-painel-grupo {
+  display: grid;
+  gap: 9px;
+}
+
+.catalogo-painel-grupo > label {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.catalogo-painel-grupo select {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid #dfd1c2;
+  border-radius: 10px;
+  padding: 0 12px;
+  background: #f8f3ed;
+  color: #2a1c20;
+}
+
+.catalogo-painel-grupo input[type="range"] {
+  width: 100%;
+  accent-color: var(--cor-cereja);
+}
+
+.catalogo-painel-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.catalogo-painel-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--cor-cereja);
+}
+
+.catalogo-painel-filtros > footer {
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid #e8ddd1;
+  padding: 16px 20px;
+}
+
+.catalogo-painel-filtros > footer button {
+  flex: 1;
+  min-height: 46px;
+  border: 1px solid var(--cor-cereja);
+  border-radius: 12px;
+  background: var(--cor-cereja);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.catalogo-painel-filtros > footer button.secundario {
+  background: transparent;
+  color: var(--cor-cereja);
+}
+
+/* Selos no canto da imagem */
+.catalogo-selos {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.catalogo-selo {
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: white;
+  background: var(--cor-cereja);
+}
+
+.catalogo-selo.promocao {
+  background: #dc2626;
+}
+
+.catalogo-selo.destaque {
+  background: #f59e0b;
+  color: #2a1c20;
+}
+
+/* Nome do produto em atÃ© 2 linhas */
+.catalogo-produto-conteudo h3 {
+  display: -webkit-box;
+  min-height: 2.7em;
+  white-space: normal;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.35;
+}
+
+/* PreÃ§o com valor antigo riscado */
+.catalogo-preco {
+  display: grid;
+  line-height: 1.25;
+}
+
+.catalogo-preco s {
+  color: #8c777d;
+  font-size: 0.7rem;
+}
+
+/* ---------- Tema escuro ---------- */
+
+.catalogo-tema-escuro .catalogo-filtros .catalogo-botao-filtros {
+  border-color: rgba(248, 239, 228, 0.14);
+  color: var(--cor-cereja-clara);
+}
+
+.catalogo-tema-escuro .catalogo-categorias button {
+  border-color: rgba(248, 239, 228, 0.12);
+  background: #1b1617;
+  color: #c9bec1;
+}
+
+.catalogo-tema-escuro .catalogo-categorias button.ativa {
+  border-color: var(--cor-cereja);
+  background: var(--cor-cereja);
+  color: white;
+}
+
+.catalogo-tema-escuro .catalogo-painel-filtros {
+  background: #1b1617;
+  color: #f8efe4;
+}
+
+.catalogo-tema-escuro .catalogo-painel-filtros > header,
+.catalogo-tema-escuro .catalogo-painel-filtros > footer {
+  border-color: rgba(248, 239, 228, 0.1);
+}
+
+.catalogo-tema-escuro .catalogo-painel-grupo select {
+  border-color: rgba(248, 239, 228, 0.12);
+  background: #272123;
+  color: #f8efe4;
+}
+
+.catalogo-tema-escuro .catalogo-painel-filtros > footer button.secundario {
+  color: var(--cor-cereja-clara);
+  border-color: var(--cor-cereja-clara);
+}
+
+.catalogo-tema-escuro .catalogo-preco s {
+  color: #a99da1;
+}
+
+/* ---------- Celular ---------- */
+
+@media (max-width: 600px) {
+  .catalogo-filtros-container {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+  }
+
+  .catalogo-filtros .catalogo-botao-filtros {
+    padding: 0 14px;
+  }
+
+  .catalogo-painel-filtros {
+    top: auto;
+    left: 0;
+    width: 100%;
+    max-height: 88vh;
+    border-radius: 18px 18px 0 0;
+    transform: translateY(105%);
+  }
+
+  .catalogo-painel-filtros.aberto {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalogo-painel-fundo,
+  .catalogo-painel-filtros {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Card do produto (mesmo visual do catÃ¡logo Lift Barber)
+   Card bem arredondado, imagem quadrada com cantos arredondados,
+   preÃ§o grande e botÃ£o quadrado sÃ³ com o Ã­cone.
+   O fundo da imagem Ã© o do tema (nunca branco forÃ§ado), entÃ£o fotos
+   sem fundo liso e PNGs transparentes ficam bem.
+   ============================================================ */
+
+.catalogo-produtos-grid {
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+  gap: 16px;
+}
+
+.catalogo-produto-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+}
+
+/* Imagem quadrada, presa dentro da caixa: fotos em pÃ©, deitadas ou
+   quadradas aparecem inteiras, nunca cortadas. */
+.catalogo-produto-imagem {
+  position: relative;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  margin: 12px 12px 0;
+  border-radius: 20px;
+}
+
+/* A prÃ³pria foto tambÃ©m tem cantos arredondados: ela ocupa sÃ³ o espaÃ§o
+   que precisa (sem esticar nem cortar) e fica centralizada no quadrado. */
+.catalogo-produto-imagem img {
+  position: absolute;
+  inset: 8px;
+  margin: auto;
+  width: auto;
+  height: auto;
+  max-width: calc(100% - 16px);
+  max-height: calc(100% - 16px);
+  padding: 0;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.catalogo-esgotado {
+  border-radius: inherit;
+}
+
+/* ConteÃºdo em coluna: preÃ§o e botÃ£o ficam sempre alinhados embaixo */
+.catalogo-produto-conteudo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px 16px;
+}
+
+.catalogo-produto-conteudo h3 {
+  margin: 0;
+  font-size: 0.97rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* A descriÃ§Ã£o continua cadastrada, mas nÃ£o aparece no card.
+   Para voltar a mostrar, apague a regra abaixo. */
+.catalogo-produto-descricao {
+  display: none;
+}
+
+/* VariaÃ§Ãµes como chips pequenos, direto no card */
+.catalogo-variacao {
+  gap: 0;
+  margin-top: 0;
+}
+
+.catalogo-variacao-opcoes {
+  gap: 6px;
+}
+
+.catalogo-variacao-botao {
+  min-width: 0;
+  min-height: 30px;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.catalogo-variacao-botao.selecionada {
+  box-shadow: none;
+  font-weight: 700;
+}
+
+/* PreÃ§o grande Ã  esquerda, botÃ£o quadrado Ã  direita */
+.catalogo-produto-final {
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin-top: auto;
+  border-top: 0;
+  padding-top: 0;
+  gap: 8px;
+}
+
+/* PreÃ§o discreto: peso mÃ©dio, "R$" menor e mais suave */
+.catalogo-produto-final .catalogo-preco strong {
+  color: #3b2a2f;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.catalogo-preco strong small {
+  margin-right: 3px;
+  font-size: 0.68em;
+  font-weight: 500;
+  opacity: 0.65;
+}
+
+.catalogo-preco s {
+  font-size: 0.74rem;
+  font-weight: 400;
+}
+
+.catalogo-produto-final .catalogo-botao-adicionar,
+.catalogo-produto-final button {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 14px;
+  padding: 0;
+  background: var(--cor-cereja);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+/* O texto do botÃ£o fica sÃ³ para leitores de tela (aria-label) */
+.catalogo-botao-adicionar span {
+  display: none;
+}
+
+.catalogo-produto-final button:hover:not(:disabled) {
+  background: var(--cor-cereja-clara);
+}
+
+.catalogo-produto-final button:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.catalogo-produto-final button:disabled {
+  background: rgba(120, 100, 105, 0.22);
+  color: #8c777d;
+  cursor: not-allowed;
+}
+
+.catalogo-produto-erro {
+  margin: 0;
+  font-size: 0.74rem;
+}
+
+/* Tema escuro */
+
+.catalogo-tema-escuro .catalogo-produto-final .catalogo-preco strong {
+  color: #efe6db;
+}
+
+.catalogo-tema-escuro .catalogo-produto-final button:disabled {
+  background: rgba(248, 239, 228, 0.08);
+  color: #81767a;
+}
+
+/* Celular: 2 cards por linha */
+
+@media (max-width: 520px) {
+  .catalogo-produtos-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .catalogo-produto-card {
+    border-radius: 20px;
+  }
+
+  .catalogo-produto-imagem {
+    margin: 8px 8px 0;
+    border-radius: 16px;
+  }
+
+  .catalogo-produto-imagem img {
+    inset: 6px;
+    max-width: calc(100% - 12px);
+    max-height: calc(100% - 12px);
+    border-radius: 10px;
+  }
+
+  .catalogo-produto-conteudo {
+    gap: 8px;
+    padding: 10px 12px 12px;
+  }
+
+  .catalogo-produto-conteudo h3 {
+    font-size: 0.86rem;
+  }
+
+  .catalogo-produto-final .catalogo-preco strong {
+    font-size: 1.02rem;
+  }
+
+  .catalogo-produto-final .catalogo-botao-adicionar,
+  .catalogo-produto-final button {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    border-radius: 12px;
+  }
+
+  .catalogo-variacao-botao {
+    padding: 3px 10px;
+    font-size: 0.72rem;
+  }
+}
+
+/* ============================================================
+   Hover: o index.css pinta todo <button> de vermelho ao passar o
+   mouse. Aqui cada botÃ£o novo mantÃ©m o prÃ³prio visual.
+   ============================================================ */
+
+.catalogo-pagina .catalogo-categorias button:hover:not(:disabled) {
+  border-color: var(--cor-cereja);
+  background: #ffffff;
+  color: #5b484d;
+  transform: none;
+}
+
+.catalogo-pagina .catalogo-categorias button.ativa:hover:not(:disabled) {
+  background: var(--cor-cereja);
+  color: #ffffff;
+}
+
+.catalogo-tema-escuro .catalogo-categorias button:hover:not(:disabled) {
+  background: #272123;
+  color: #f8efe4;
+}
+
+.catalogo-tema-escuro .catalogo-categorias button.ativa:hover:not(:disabled) {
+  background: var(--cor-cereja);
+  color: #ffffff;
+}
+
+.catalogo-pagina .catalogo-variacao-botao:hover:not(:disabled) {
+  border-color: var(--cor-cereja);
+  background: rgba(var(--catalogo-acento-rgb), 0.07);
+  color: var(--cor-cereja);
+  transform: none;
+}
+
+.catalogo-pagina .catalogo-variacao-botao.selecionada:hover:not(:disabled) {
+  background: rgba(var(--catalogo-acento-rgb), 0.12);
+}
+
+.catalogo-tema-escuro .catalogo-variacao-botao:hover:not(:disabled) {
+  background: rgba(var(--catalogo-acento-rgb), 0.16);
+  color: var(--cor-cereja-clara);
+}
+
+.catalogo-painel-filtros > header button:hover:not(:disabled) {
+  background: rgba(var(--catalogo-acento-rgb, 159, 16, 44), 0.1);
+  color: inherit;
+  transform: none;
+}
+
+.catalogo-painel-filtros > footer button.secundario:hover:not(:disabled) {
+  background: rgba(var(--catalogo-acento-rgb, 159, 16, 44), 0.1);
+  color: var(--cor-cereja);
+  transform: none;
+}
+
+.catalogo-tema-escuro
+  .catalogo-painel-filtros
+  > footer
+  button.secundario:hover:not(:disabled) {
+  color: var(--cor-cereja-clara);
+}
+
+.catalogo-painel-filtros > footer button:not(.secundario):hover:not(:disabled) {
+  background: var(--cor-cereja-clara);
+  color: #ffffff;
+  transform: none;
+}
+
+.carrinho-orcamento:hover:not(:disabled) {
+  background: rgba(var(--catalogo-acento-rgb, 159, 16, 44), 0.08);
+  color: var(--cor-cereja, #9f102c);
+  transform: none;
+}
+
+.catalogo-tema-escuro .carrinho-orcamento:hover:not(:disabled) {
+  color: var(--cor-cereja-clara, #c91835);
+}

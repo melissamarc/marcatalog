@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Archive,
+  BarChart3,
   Boxes,
   CheckCircle2,
   Copy,
   ExternalLink,
+  FileSpreadsheet,
   LayoutDashboard,
   LogOut,
   MessageCircle,
@@ -167,6 +169,24 @@ function Admin() {
             >
               <PackagePlus size={19} />
               Adicionar produto
+            </button>
+
+            <button
+              type="button"
+              onClick={() =>
+                navigate("/admin/produtos/importar")
+              }
+            >
+              <FileSpreadsheet size={19} />
+              Importar planilha
+            </button>
+
+            <button
+              type="button"
+              onClick={() => navigate("/admin/metricas")}
+            >
+              <BarChart3 size={19} />
+              Métricas
             </button>
 
 <button
@@ -390,6 +410,40 @@ function Admin() {
                 <strong>Gerenciar produtos</strong>
                 <small>
                   Edite preços e disponibilidade
+                </small>
+              </div>
+            </button>
+
+<button
+              type="button"
+              onClick={() =>
+                navigate("/admin/produtos/importar")
+              }
+            >
+              <span>
+                <FileSpreadsheet size={23} />
+              </span>
+
+              <div>
+                <strong>Importar planilha</strong>
+                <small>
+                  Cadastre vários produtos de uma vez
+                </small>
+              </div>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => navigate("/admin/metricas")}
+            >
+              <span>
+                <BarChart3 size={23} />
+              </span>
+
+              <div>
+                <strong>Métricas</strong>
+                <small>
+                  Veja visitas, carrinhos e pedidos
                 </small>
               </div>
             </button>

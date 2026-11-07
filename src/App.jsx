@@ -21,6 +21,8 @@ import AdicionarProduto from "./pages/AdicionarProduto";
 import GerenciarProdutos from "./pages/GerenciarProdutos";
 import EditarProduto from "./pages/EditarProduto";
 import VariacoesProduto from "./pages/VariacoesProduto";
+import ImportarProdutos from "./pages/ImportarProdutos";
+import Metricas from "./pages/Metricas";
 import GerenciarVendedores from "./pages/GerenciarVendedores";
 
 import ConfiguracoesEmpresa from "./pages/ConfiguracoesEmpresa";
@@ -87,6 +89,24 @@ function App() {
               element={
                 <RotaAssinante>
                   <GerenciarProdutos />
+                </RotaAssinante>
+              }
+            />
+
+            <Route
+              path="/admin/produtos/importar"
+              element={
+                <RotaAssinante>
+                  <ImportarProdutos />
+                </RotaAssinante>
+              }
+            />
+
+            <Route
+              path="/admin/metricas"
+              element={
+                <RotaAssinante>
+                  <Metricas />
                 </RotaAssinante>
               }
             />

@@ -1,0 +1,229 @@
+.metricas-pagina {
+  width: min(1100px, calc(100% - 40px));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 42px 0 80px;
+}
+
+.metricas-topo > button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--cor-texto-secundario);
+  font-size: 0.8rem;
+}
+
+.metricas-titulo {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.metricas-titulo h1 {
+  color: var(--cor-bege-claro);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  letter-spacing: -0.05em;
+}
+
+.metricas-titulo p {
+  margin-top: 9px;
+  color: var(--cor-texto-secundario);
+}
+
+.metricas-periodos {
+  display: flex;
+  gap: 4px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 12px;
+  padding: 4px;
+  background: var(--cor-superficie);
+}
+
+.metricas-periodos button {
+  border: 0;
+  background: transparent;
+  color: var(--cor-texto-secundario);
+  font-size: 0.8rem;
+  padding: 8px 14px;
+}
+
+.metricas-periodos button.ativo {
+  background: var(--cor-cereja);
+  color: white;
+}
+
+.metricas-erro {
+  margin-top: 26px;
+  border: 1px solid rgba(255, 107, 127, 0.4);
+  border-radius: var(--raio-pequeno);
+  padding: 14px 16px;
+  background: rgba(255, 107, 127, 0.08);
+  color: var(--cor-erro);
+  line-height: 1.5;
+}
+
+.metricas-carregando {
+  margin-top: 40px;
+  color: var(--cor-texto-secundario);
+}
+
+.metricas-cartoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.metricas-cartoes article {
+  display: grid;
+  gap: 4px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-medio);
+  padding: 20px;
+  background: var(--cor-superficie);
+}
+
+.metricas-cartoes article > span {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  background: rgba(159, 16, 44, 0.2);
+  color: var(--cor-cereja-clara);
+}
+
+.metricas-cartoes strong {
+  color: var(--cor-bege-claro);
+  font-size: 2.1rem;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.metricas-cartoes p {
+  color: var(--cor-texto-secundario);
+  font-size: 0.82rem;
+}
+
+.metricas-cartoes small {
+  color: var(--cor-sucesso);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.metricas-caixa {
+  margin-top: 18px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-medio);
+  padding: 22px;
+  background: var(--cor-superficie);
+}
+
+.metricas-caixa h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 16px;
+  color: var(--cor-bege-claro);
+  font-size: 1rem;
+}
+
+.metricas-grafico {
+  height: 170px;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  padding-bottom: 22px;
+}
+
+.metricas-barra {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.metricas-barra div {
+  width: 100%;
+  min-height: 3px;
+  border-radius: 4px 4px 0 0;
+  background: var(--cor-cereja-clara);
+}
+
+.metricas-barra span {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--cor-texto-secundario);
+  font-size: 0.62rem;
+  white-space: nowrap;
+}
+
+.metricas-duas-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.metricas-dica,
+.metricas-vazio {
+  margin-bottom: 12px;
+  color: var(--cor-texto-secundario);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.metricas-lista {
+  list-style: none;
+}
+
+.metricas-lista li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-top: 1px solid var(--cor-borda);
+  padding: 11px 0;
+  font-size: 0.88rem;
+}
+
+.metricas-lista li:first-child {
+  border-top: 0;
+}
+
+.metricas-lista li span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.metricas-lista li strong {
+  flex: none;
+  min-width: 34px;
+  border-radius: 99px;
+  padding: 3px 10px;
+  background: var(--cor-superficie-clara);
+  color: var(--cor-bege-claro);
+  text-align: center;
+}
+
+.metricas-rodape {
+  margin-top: 22px;
+  color: var(--cor-texto-secundario);
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 760px) {
+  .metricas-duas-colunas {
+    grid-template-columns: 1fr;
+  }
+}

@@ -336,3 +336,34 @@
     height: 260px;
   }
 }
+.gestao-topo-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gestao-importar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid var(--cor-borda);
+  background: transparent;
+  color: var(--cor-bege);
+}
+
+.gestao-produto-extras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.gestao-produto-extras span {
+  border-radius: 999px;
+  padding: 4px 9px;
+  background: rgba(159, 16, 44, 0.2);
+  color: var(--cor-cereja-clara);
+  font-size: 0.68rem;
+  font-weight: 700;
+}

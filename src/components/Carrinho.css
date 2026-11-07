@@ -360,7 +360,7 @@
   }
 }
 
-/* Seleção de vendedor */
+/* SeleÃ§Ã£o de vendedor */
 
 .carrinho-vendedor {
   display: grid;
@@ -607,4 +607,35 @@
   .carrinho-vendedor select {
     font-size: 0.76rem;
   }
+}
+/* OrÃ§amento em PDF e preÃ§o antigo (promoÃ§Ã£o) */
+
+.carrinho-orcamento {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  border: 1px solid var(--cor-cereja, #9f102c);
+  background: transparent;
+  color: var(--cor-cereja, #9f102c);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.carrinho-orcamento:hover {
+  background: rgba(var(--catalogo-acento-rgb, 159, 16, 44), 0.08);
+}
+
+.catalogo-tema-escuro .carrinho-orcamento {
+  border-color: var(--cor-cereja-clara, #c91835);
+  color: var(--cor-cereja-clara, #c91835);
+}
+
+.carrinho-preco-antigo {
+  margin-right: 7px;
+  color: #8b777c;
+  font-size: 0.72rem;
+  font-weight: 500;
 }

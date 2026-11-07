@@ -5,6 +5,8 @@ import {
   useState,
 } from "react";
 
+import { calcularPreco } from "../utils/precos";
+
 const CarrinhoContext = createContext();
 
 const CHAVE_CARRINHO = "marcatalog-carrinho";
@@ -78,9 +80,8 @@ export function CarrinhoProvider({ children }) {
         };
       }
 
-      const valorAdicional = variacao
-        ? Number(variacao.valor_adicional)
-        : 0;
+      const { precoFinal, precoOriginal, emPromocao } =
+        calcularPreco(produto, variacao);
 
       const imagemFinal =
         variacao?.imagem_url ||
@@ -94,9 +95,10 @@ export function CarrinhoProvider({ children }) {
           {
             ...produto,
             chaveCarrinho,
-            preco:
-              Number(produto.preco) +
-              valorAdicional,
+            preco: precoFinal,
+            precoOriginal: emPromocao
+              ? precoOriginal
+              : null,
             imagem_url: imagemFinal,
             variacaoSelecionada: variacao,
             quantidade: 1,

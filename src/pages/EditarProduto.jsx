@@ -7,6 +7,7 @@ import {
   ImagePlus,
   Package,
   Save,
+  Sparkles,
   Tag,
   Tags,
   UploadCloud,
@@ -26,6 +27,9 @@ function EditarProduto() {
   const [preco, setPreco] = useState("");
   const [categoria, setCategoria] = useState("");
   const [marca, setMarca] = useState("");
+  const [precoPromocional, setPrecoPromocional] =
+    useState("");
+  const [selo, setSelo] = useState("");
   const [novaImagem, setNovaImagem] = useState(null);
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(true);
@@ -51,6 +55,8 @@ function EditarProduto() {
       setPreco(data.preco);
       setCategoria(data.categoria);
       setMarca(data.marca ?? "");
+      setPrecoPromocional(data.preco_promocional ?? "");
+      setSelo(data.selo ?? "");
       setCarregando(false);
     }
 
@@ -76,6 +82,16 @@ function EditarProduto() {
 
   async function salvarProduto(evento) {
     evento.preventDefault();
+
+    if (
+      precoPromocional !== "" &&
+      Number(precoPromocional) >= Number(preco)
+    ) {
+      setErro(
+        "O preço promocional precisa ser menor que o preço normal."
+      );
+      return;
+    }
 
     setSalvando(true);
     setErro("");
@@ -118,6 +134,11 @@ function EditarProduto() {
         preco: Number(preco),
         categoria,
         marca: marca || null,
+        preco_promocional:
+          precoPromocional === ""
+            ? null
+            : Number(precoPromocional),
+        selo: selo || null,
         imagem_url: novaImagemUrl,
       })
       .eq("id", produtoId);
@@ -323,6 +344,71 @@ function EditarProduto() {
                       setMarca(evento.target.value)
                     }
                   />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="produto-form-secao">
+            <div className="produto-form-secao-titulo">
+              <span>
+                <Sparkles size={21} />
+              </span>
+
+              <div>
+                <h2>Promoção e destaque</h2>
+                <p>
+                  Opcional. Aparece como selo e preço
+                  riscado no catálogo.
+                </p>
+              </div>
+            </div>
+
+            <div className="produto-form-linha">
+              <div className="produto-form-campo">
+                <label htmlFor="precoPromocional">
+                  Preço promocional
+                </label>
+
+                <div className="produto-form-input">
+                  <BadgeDollarSign size={18} />
+
+                  <input
+                    id="precoPromocional"
+                    type="number"
+                    value={precoPromocional}
+                    onChange={(evento) =>
+                      setPrecoPromocional(
+                        evento.target.value
+                      )
+                    }
+                    min="0"
+                    step="0.01"
+                    placeholder="Deixe vazio se não há promoção"
+                  />
+                </div>
+              </div>
+
+              <div className="produto-form-campo">
+                <label htmlFor="selo">Selo</label>
+
+                <div className="produto-form-input">
+                  <Sparkles size={18} />
+
+                  <select
+                    id="selo"
+                    className="produto-form-select"
+                    value={selo}
+                    onChange={(evento) =>
+                      setSelo(evento.target.value)
+                    }
+                  >
+                    <option value="">Sem selo</option>
+                    <option value="novo">Novo</option>
+                    <option value="destaque">
+                      Destaque
+                    </option>
+                  </select>
                 </div>
               </div>
             </div>

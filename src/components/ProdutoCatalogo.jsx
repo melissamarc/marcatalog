@@ -5,6 +5,13 @@ import {
   ShoppingBag,
 } from "lucide-react";
 import { useCarrinho } from "../contexts/CarrinhoContext";
+import { registrarEvento } from "../services/eventos";
+import {
+  SELOS,
+  calcularPreco,
+  formatarPreco,
+  separarMoeda,
+} from "../utils/precos";
 
 function ProdutoCatalogo({ produto, empresa }) {
   const { adicionarProduto } = useCarrinho();
@@ -23,23 +30,17 @@ function ProdutoCatalogo({ produto, empresa }) {
       variacao.id === variacaoId
   );
 
-  const precoFinal =
-    Number(produto.preco) +
-    Number(
-      variacaoSelecionada?.valor_adicional ?? 0
-    );
+  const {
+    precoOriginal,
+    precoFinal,
+    emPromocao,
+    percentualDesconto,
+  } = calcularPreco(produto, variacaoSelecionada);
 
   const imagemExibida =
     variacaoSelecionada?.imagem_url ||
     produto.imagem_url ||
     null;
-
-  function formatarPreco(valor) {
-    return Number(valor).toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    });
-  }
 
   function selecionarVariacao(variacao) {
     setVariacaoId(variacao.id);
@@ -63,6 +64,10 @@ function ProdutoCatalogo({ produto, empresa }) {
       empresa.slug,
       variacaoSelecionada ?? null
     );
+
+    registrarEvento(empresa.id, "add_carrinho", {
+      produtoId: produto.id,
+    });
 
     setErro("");
     setAdicionado(true);
@@ -89,6 +94,28 @@ function ProdutoCatalogo({ produto, empresa }) {
           <Package size={42} />
         )}
 
+        {!produto.esgotado &&
+          (emPromocao ||
+            (produto.selo && SELOS[produto.selo])) && (
+          <div className="catalogo-selos">
+            {emPromocao && (
+              <span className="catalogo-selo promocao">
+                {percentualDesconto > 0
+                  ? `-${percentualDesconto}%`
+                  : "Promoção"}
+              </span>
+            )}
+
+            {produto.selo && SELOS[produto.selo] && (
+              <span
+                className={`catalogo-selo ${produto.selo}`}
+              >
+                {SELOS[produto.selo]}
+              </span>
+            )}
+          </div>
+        )}
+
         {produto.esgotado && (
           <span className="catalogo-esgotado">
             Esgotado
@@ -97,7 +124,7 @@ function ProdutoCatalogo({ produto, empresa }) {
       </div>
 
       <div className="catalogo-produto-conteudo">
-        <h3>{produto.nome}</h3>
+        <h3 title={produto.nome}>{produto.nome}</h3>
 
         {produto.descricao && (
           <p className="catalogo-produto-descricao">
@@ -107,16 +134,6 @@ function ProdutoCatalogo({ produto, empresa }) {
 
         {variacoes.length > 0 && (
           <div className="catalogo-variacao">
-            <div className="catalogo-variacao-topo">
-              <span>Escolha uma opção</span>
-
-              {variacaoSelecionada && (
-                <strong>
-                  {variacaoSelecionada.nome}
-                </strong>
-              )}
-            </div>
-
             <div
               className="catalogo-variacao-opcoes"
               role="group"
@@ -149,28 +166,47 @@ function ProdutoCatalogo({ produto, empresa }) {
         )}
 
         <div className="catalogo-produto-final">
-          <strong>
-            {formatarPreco(precoFinal)}
-          </strong>
+          <div className="catalogo-preco">
+            {emPromocao && (
+              <s>{formatarPreco(precoOriginal)}</s>
+            )}
+
+            <strong aria-label={formatarPreco(precoFinal)}>
+              <small aria-hidden="true">
+                {separarMoeda(precoFinal).moeda}
+              </small>
+              <span aria-hidden="true">
+                {separarMoeda(precoFinal).numero}
+              </span>
+            </strong>
+          </div>
 
           {produto.esgotado ? (
-            <button type="button" disabled>
-              Indisponível
+            <button
+              className="catalogo-botao-adicionar"
+              type="button"
+              disabled
+              aria-label={`${produto.nome} está indisponível`}
+            >
+              <ShoppingBag size={18} />
+              <span>Indisponível</span>
             </button>
           ) : (
             <button
+              className="catalogo-botao-adicionar"
               type="button"
               onClick={adicionar}
+              aria-label={`Adicionar ${produto.nome} ao carrinho`}
             >
               {adicionado ? (
                 <>
                   <Check size={18} />
-                  Adicionado
+                  <span>Adicionado</span>
                 </>
               ) : (
                 <>
                   <ShoppingBag size={18} />
-                  Adicionar
+                  <span>Adicionar</span>
                 </>
               )}
             </button>

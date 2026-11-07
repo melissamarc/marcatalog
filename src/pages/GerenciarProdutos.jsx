@@ -4,6 +4,7 @@ import {
   ArrowLeft,
   Boxes,
   Edit3,
+  FileSpreadsheet,
   Layers3,
   Package,
   PackagePlus,
@@ -232,16 +233,29 @@ function GerenciarProdutos() {
           </p>
         </div>
 
-        <button
-          className="gestao-adicionar"
-          type="button"
-          onClick={() =>
-            navigate("/admin/produtos/novo")
-          }
-        >
-          <PackagePlus size={19} />
-          Adicionar produto
-        </button>
+        <div className="gestao-topo-acoes">
+          <button
+            className="gestao-importar"
+            type="button"
+            onClick={() =>
+              navigate("/admin/produtos/importar")
+            }
+          >
+            <FileSpreadsheet size={19} />
+            Importar planilha
+          </button>
+
+          <button
+            className="gestao-adicionar"
+            type="button"
+            onClick={() =>
+              navigate("/admin/produtos/novo")
+            }
+          >
+            <PackagePlus size={19} />
+            Adicionar produto
+          </button>
+        </div>
       </header>
 
       <section className="gestao-resumo">
@@ -343,6 +357,36 @@ function GerenciarProdutos() {
                   <strong>
                     {formatarPreco(produto.preco)}
                   </strong>
+
+                  {(produto.selo ||
+                    (produto.preco_promocional !== null &&
+                      produto.preco_promocional !==
+                        undefined &&
+                      Number(produto.preco_promocional) <
+                        Number(produto.preco))) && (
+                    <div className="gestao-produto-extras">
+                      {produto.preco_promocional !== null &&
+                        produto.preco_promocional !==
+                          undefined &&
+                        Number(produto.preco_promocional) <
+                          Number(produto.preco) && (
+                          <span>
+                            Promoção:{" "}
+                            {formatarPreco(
+                              produto.preco_promocional
+                            )}
+                          </span>
+                        )}
+
+                      {produto.selo && (
+                        <span>
+                          {produto.selo === "novo"
+                            ? "Selo: Novo"
+                            : "Selo: Destaque"}
+                        </span>
+                      )}
+                    </div>
+                  )}
 
                   <div className="gestao-produto-acoes">
                     <button

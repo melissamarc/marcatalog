@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  FileDown,
   MessageCircle,
   Minus,
   Plus,
@@ -11,6 +12,8 @@ import {
   X,
 } from "lucide-react";
 import { useCarrinho } from "../contexts/CarrinhoContext";
+import { registrarEvento } from "../services/eventos";
+import { gerarOrcamentoPdf } from "../utils/orcamentoPdf";
 import "./Carrinho.css";
 
 function Carrinho({ empresa, vendedores = [] }) {
@@ -69,6 +72,32 @@ function Carrinho({ empresa, vendedores = [] }) {
       style: "currency",
       currency: "BRL",
     });
+  }
+
+  function baixarOrcamento() {
+    setErro("");
+
+    if (itens.length === 0) {
+      setErro("Adicione pelo menos um produto ao carrinho.");
+      return;
+    }
+
+    const abriu = gerarOrcamentoPdf({
+      empresa,
+      itens,
+      cliente: nomeCliente.trim(),
+      vendedor: vendedorSelecionado,
+      total: valorTotal,
+    });
+
+    if (!abriu) {
+      setErro(
+        "Seu navegador bloqueou a janela do orçamento. Permita pop-ups e tente novamente."
+      );
+      return;
+    }
+
+    registrarEvento(empresa.id, "orcamento_pdf");
   }
 
   function enviarPedido() {
@@ -146,6 +175,10 @@ Total: ${formatarPreco(valorTotal)}`;
     const linkWhatsapp = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(
       mensagem
     )}`;
+
+    registrarEvento(empresa.id, "clique_whatsapp", {
+      vendedorId: vendedorSelecionado?.id,
+    });
 
     window.open(
       linkWhatsapp,
@@ -261,6 +294,13 @@ Total: ${formatarPreco(valorTotal)}`;
                         )}
 
                         <strong>
+                          {item.precoOriginal && (
+                            <s className="carrinho-preco-antigo">
+                              {formatarPreco(
+                                item.precoOriginal
+                              )}
+                            </s>
+                          )}
                           {formatarPreco(item.preco)}
                         </strong>
 
@@ -414,6 +454,15 @@ Total: ${formatarPreco(valorTotal)}`;
                   >
                     <MessageCircle size={20} />
                     Enviar pedido pelo WhatsApp
+                  </button>
+
+                  <button
+                    className="carrinho-orcamento"
+                    type="button"
+                    onClick={baixarOrcamento}
+                  >
+                    <FileDown size={18} />
+                    Baixar orçamento em PDF
                   </button>
 
                   <button
