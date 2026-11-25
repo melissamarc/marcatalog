@@ -207,7 +207,7 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: #eee5db;
+  background: #ffffff;
   color: #9b878c;
 }
 
@@ -704,7 +704,7 @@
 
 .catalogo-tema-escuro .catalogo-produto-imagem {
   color: #8f8588;
-  background: #272123;
+  background: #ffffff;;
 }
 
 .catalogo-tema-escuro
