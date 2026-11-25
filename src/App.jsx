@@ -23,6 +23,7 @@ import EditarProduto from "./pages/EditarProduto";
 import VariacoesProduto from "./pages/VariacoesProduto";
 import ImportarProdutos from "./pages/ImportarProdutos";
 import Metricas from "./pages/Metricas";
+import PedidosCopia from "./pages/PedidosCopia";
 import GerenciarVendedores from "./pages/GerenciarVendedores";
 
 import ConfiguracoesEmpresa from "./pages/ConfiguracoesEmpresa";
@@ -107,6 +108,15 @@ function App() {
               element={
                 <RotaAssinante>
                   <Metricas />
+                </RotaAssinante>
+              }
+            />
+
+            <Route
+              path="/admin/pedidos"
+              element={
+                <RotaAssinante>
+                  <PedidosCopia />
                 </RotaAssinante>
               }
             />

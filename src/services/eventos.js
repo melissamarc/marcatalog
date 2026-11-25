@@ -18,7 +18,7 @@ function obterSessao() {
 }
 
 /**
- * Registra um evento de métrica do catálogo.
+ * Registra um evento de mÃ©trica do catÃ¡logo.
  * Nunca atrapalha o cliente: se der erro, apenas ignora.
  *
  * tipos: visita | add_carrinho | clique_whatsapp |

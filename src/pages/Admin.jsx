@@ -14,6 +14,7 @@ import {
   Package,
   ShieldCheck,
   PackagePlus,
+  Receipt,
   Settings,
   Store,
   Tags,
@@ -188,6 +189,16 @@ function Admin() {
               <BarChart3 size={19} />
               Métricas
             </button>
+
+            {empresa.recursos_novos && (
+              <button
+                type="button"
+                onClick={() => navigate("/admin/pedidos")}
+              >
+                <Receipt size={19} />
+                Pedidos
+              </button>
+            )}
 
 <button
   type="button"
@@ -447,6 +458,24 @@ function Admin() {
                 </small>
               </div>
             </button>
+
+            {empresa.recursos_novos && (
+              <button
+                type="button"
+                onClick={() => navigate("/admin/pedidos")}
+              >
+                <span>
+                  <Receipt size={23} />
+                </span>
+
+                <div>
+                  <strong>Pedidos</strong>
+                  <small>
+                    PDF dos pedidos enviados pelo WhatsApp
+                  </small>
+                </div>
+              </button>
+            )}
 
 <button
   type="button"

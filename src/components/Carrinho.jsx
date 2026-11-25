@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useCarrinho } from "../contexts/CarrinhoContext";
 import { registrarEvento } from "../services/eventos";
+import { salvarCopiaPedido } from "../services/pedidos";
 import { gerarOrcamentoPdf } from "../utils/orcamentoPdf";
 import "./Carrinho.css";
 
@@ -178,6 +179,17 @@ Total: ${formatarPreco(valorTotal)}`;
 
     registrarEvento(empresa.id, "clique_whatsapp", {
       vendedorId: vendedorSelecionado?.id,
+    });
+
+    // Função exclusiva: guarda uma cópia do pedido (PDF com fotos)
+    // na aba "Pedidos" do admin. Não espera resposta para não
+    // atrasar nem bloquear a abertura do WhatsApp.
+    salvarCopiaPedido({
+      empresa,
+      itens,
+      cliente: nomeCliente.trim(),
+      vendedor: vendedorSelecionado,
+      total: valorTotal,
     });
 
     window.open(
