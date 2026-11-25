@@ -13,7 +13,7 @@ import {
   separarMoeda,
 } from "../utils/precos";
 
-function ProdutoCatalogo({ produto, empresa }) {
+function ProdutoCatalogo({ produto, empresa, onAbrir }) {
   const { adicionarProduto } = useCarrinho();
 
   const [variacaoId, setVariacaoId] = useState("");
@@ -48,6 +48,32 @@ function ProdutoCatalogo({ produto, empresa }) {
     setAdicionado(false);
   }
 
+  // Abre o modal com os detalhes do produto
+  function abrirDetalhes() {
+    onAbrir?.(produto, variacaoId);
+  }
+
+  function aoTeclarParaAbrir(evento) {
+    if (evento.key === "Enter" || evento.key === " ") {
+      evento.preventDefault();
+      abrirDetalhes();
+    }
+  }
+
+  const propsAbrirDetalhes = onAbrir
+    ? {
+        role: "button",
+        tabIndex: 0,
+        onClick: abrirDetalhes,
+        onKeyDown: aoTeclarParaAbrir,
+        "aria-label": `Ver detalhes de ${produto.nome}`,
+      }
+    : {};
+
+  const classeClicavel = onAbrir
+    ? " catalogo-produto-clicavel"
+    : "";
+
   function adicionar() {
     if (
       variacoes.length > 0 &&
@@ -79,7 +105,10 @@ function ProdutoCatalogo({ produto, empresa }) {
 
   return (
     <article className="catalogo-produto-card">
-      <div className="catalogo-produto-imagem">
+      <div
+        className={`catalogo-produto-imagem${classeClicavel}`}
+        {...propsAbrirDetalhes}
+      >
         {imagemExibida ? (
           <img
             key={imagemExibida}
@@ -124,7 +153,13 @@ function ProdutoCatalogo({ produto, empresa }) {
       </div>
 
       <div className="catalogo-produto-conteudo">
-        <h3 title={produto.nome}>{produto.nome}</h3>
+        <h3
+          title={produto.nome}
+          className={classeClicavel.trim()}
+          {...propsAbrirDetalhes}
+        >
+          {produto.nome}
+        </h3>
 
         {produto.descricao && (
           <p className="catalogo-produto-descricao">

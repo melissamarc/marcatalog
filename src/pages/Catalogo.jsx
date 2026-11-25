@@ -19,6 +19,7 @@ import {
 } from "../utils/precos";
 import Carrinho from "../components/Carrinho";
 import ProdutoCatalogo from "../components/ProdutoCatalogo";
+import ModalProduto from "../components/ModalProduto";
 import "./Catalogo.css";
 import "./CatalogoExtras.css";
 
@@ -39,6 +40,7 @@ function Catalogo() {
     useState(false);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
+  const [detalhe, setDetalhe] = useState(null);
 const [vendedores, setVendedores] = useState([]);
 
   useEffect(() => {
@@ -309,6 +311,12 @@ if (erroVendedores) {
       </main>
     );
   }
+
+  const produtoAberto = detalhe
+    ? produtos.find(
+        (produto) => produto.id === detalhe.produtoId
+      )
+    : null;
 
   const filtrosNoPainel =
     (marca ? 1 : 0) +
@@ -620,6 +628,15 @@ if (erroVendedores) {
                 key={produto.id}
                 produto={produto}
                 empresa={empresa}
+                onAbrir={
+                  empresa.recursos_novos
+                    ? (produtoClicado, variacaoId) =>
+                        setDetalhe({
+                          produtoId: produtoClicado.id,
+                          variacaoId,
+                        })
+                    : undefined
+                }
               />
             ))}
           </div>
@@ -644,6 +661,16 @@ if (erroVendedores) {
           Catálogo criado com <span>Marcatalog</span>
         </p>
       </footer>
+
+      {empresa.recursos_novos && produtoAberto && (
+        <ModalProduto
+          key={produtoAberto.id}
+          produto={produtoAberto}
+          empresa={empresa}
+          variacaoInicialId={detalhe.variacaoId}
+          aoFechar={() => setDetalhe(null)}
+        />
+      )}
     </main>
   );
 }

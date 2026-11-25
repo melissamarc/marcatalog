@@ -383,7 +383,23 @@ setCorCatalogo(data.cor_catalogo ?? "cereja");
           nome: "Laranja",
           cor: "#d95f18",
         },
-      ].map((opcao) => (
+        {
+          codigo: "cinza",
+          nome: "Cinza",
+          cor: "#6b7280",
+        },
+        {
+          codigo: "amarelo",
+          nome: "Amarelo",
+          cor: "#eab308",
+        },
+      ]
+        .filter(
+          (opcao) =>
+            empresa.recursos_novos ||
+            !["cinza", "amarelo"].includes(opcao.codigo)
+        )
+        .map((opcao) => (
         <button
           className={
             corCatalogo === opcao.codigo

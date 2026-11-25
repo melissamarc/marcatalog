@@ -13,6 +13,8 @@ const CORES = {
   verde: "#15803d",
   roxo: "#7c3aed",
   laranja: "#c2410c",
+  cinza: "#4b5563",
+  amarelo: "#eab308",
 };
 
 const SLUG_VALIDO = /^[a-zA-Z0-9_-]{1,80}$/;
