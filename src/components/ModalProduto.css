@@ -61,7 +61,7 @@
   --modal-texto-suave: #c9bec1;
   --modal-texto-mudo: #a99da1;
   --modal-borda: rgba(248, 239, 228, 0.1);
-  --modal-foto-fundo: #272123;
+  --modal-foto-fundo: #ffffff;
 
   border: 1px solid rgba(248, 239, 228, 0.1);
 }
